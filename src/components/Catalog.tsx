@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
+import ProductDetailModal from './ProductDetailModal';
 
 export interface Product {
   id: number;
@@ -83,6 +84,8 @@ export default function Catalog({ onSelectForAI }: CatalogProps) {
   const [activeCategory, setActiveCategory] = useState('Все');
   const [activeOccasion, setActiveOccasion] = useState('Все');
   const [activeRecipient, setActiveRecipient] = useState('Все');
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filteredProducts = products.filter(p => {
     const categoryMatch = activeCategory === 'Все' || p.category === activeCategory;
@@ -91,7 +94,19 @@ export default function Catalog({ onSelectForAI }: CatalogProps) {
     return categoryMatch && occasionMatch && recipientMatch;
   });
 
+  const handleOpenDetail = (product: Product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
   return (
+    <>
+      <ProductDetailModal 
+        product={selectedProduct}
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        onSelectForAI={onSelectForAI}
+      />
     <section id="catalog" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-primary">
@@ -155,8 +170,9 @@ export default function Catalog({ onSelectForAI }: CatalogProps) {
           {filteredProducts.map((product, index) => (
             <Card
               key={product.id}
-              className="overflow-hidden hover:shadow-xl transition-shadow duration-300 animate-scale-in"
+              className="overflow-hidden hover:shadow-xl transition-shadow duration-300 animate-scale-in cursor-pointer"
               style={{ animationDelay: `${index * 0.1}s` }}
+              onClick={() => handleOpenDetail(product)}
             >
               <div className="aspect-square bg-muted relative overflow-hidden flex items-center justify-center text-4xl md:text-8xl">
                 {product.image}
@@ -178,12 +194,23 @@ export default function Catalog({ onSelectForAI }: CatalogProps) {
                   <p className="text-xs md:text-lg font-semibold text-primary">{product.price}</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-2">
-                  <Button variant="outline" size="sm" className="text-xs md:text-sm h-7 md:h-9 hidden md:flex">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="text-xs md:text-sm h-7 md:h-9 hidden md:flex"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenDetail(product);
+                    }}
+                  >
                     Подробнее
                   </Button>
                   <Button 
                     size="sm"
-                    onClick={() => onSelectForAI?.(product)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelectForAI?.(product);
+                    }}
                     className="text-xs md:text-sm h-7 md:h-9 w-full"
                   >
                     <Icon name="Sparkles" className="mr-1" size={12} />
@@ -196,5 +223,6 @@ export default function Catalog({ onSelectForAI }: CatalogProps) {
         </div>
       </div>
     </section>
+    </>
   );
 }
