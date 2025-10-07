@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
+import AwardVisualizer from '@/components/AwardVisualizer';
 
 interface Award {
   id: number;
@@ -487,7 +488,9 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="order" className="py-20">
+      <AwardVisualizer />
+
+      <section id="order" className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-primary">
