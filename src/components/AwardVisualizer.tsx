@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -32,6 +33,10 @@ interface AwardVisualizerProps {
 }
 
 export default function AwardVisualizer({ preselectedAward }: AwardVisualizerProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isStandalonePage = location.pathname === '/constructor';
+  
   const [selectedAward, setSelectedAward] = useState<Award | null>(() => {
     if (preselectedAward) {
       const priceNum = parseInt(preselectedAward.price.replace(/\D/g, ''));
@@ -182,6 +187,16 @@ photorealistic, 8k resolution, professional photography`;
     <section id="constructor" className="py-24 bg-gradient-to-b from-muted/30 to-background">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
+          {isStandalonePage && (
+            <Button
+              variant="ghost"
+              onClick={() => navigate('/catalog')}
+              className="mb-6"
+            >
+              <Icon name="ArrowLeft" className="mr-2" size={18} />
+              Назад в каталог
+            </Button>
+          )}
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-primary">
             Конструктор наград
           </h2>
