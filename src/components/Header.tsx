@@ -44,6 +44,14 @@ export default function Header() {
               Конструктор
             </Link>
             <Link 
+              to="/about" 
+              className={`text-sm font-medium transition-colors ${
+                isActive('/about') ? 'text-primary' : 'text-foreground hover:text-primary'
+              }`}
+            >
+              О компании
+            </Link>
+            <Link 
               to="/contact" 
               className={`text-sm font-medium transition-colors ${
                 isActive('/contact') ? 'text-primary' : 'text-foreground hover:text-primary'
@@ -81,6 +89,13 @@ export default function Header() {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Конструктор
+                </Link>
+                <Link
+                  to="/about"
+                  className="text-lg font-medium"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  О компании
                 </Link>
                 <Link
                   to="/contact"

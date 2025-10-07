@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Catalog, { Product } from '@/components/Catalog';
 
 export default function CatalogPage() {
@@ -9,5 +9,10 @@ export default function CatalogPage() {
     navigate('/constructor', { state: { product } });
   };
 
-  return <Catalog onSelectForAI={handleSelectForAI} />;
+  return (
+    <>
+      <Breadcrumbs />
+      <Catalog onSelectForAI={handleSelectForAI} />
+    </>
+  );
 }
