@@ -1,77 +1,79 @@
 import { useState } from 'react';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 
-interface Product {
+export interface Product {
   id: number;
   title: string;
   category: string;
+  occasion: string;
+  recipient: string;
   price: string;
   image: string;
-  description: string;
-  features: string[];
 }
 
 const products: Product[] = [
   {
     id: 1,
-    title: 'Кристальная звезда',
-    category: 'Награды',
+    title: 'Кубок "Лидерство"',
+    category: 'Кубки',
+    occasion: 'Корпоративное мероприятие',
+    recipient: 'Руководителю',
     price: 'от 45 000 ₽',
-    image: '🏆',
-    description: 'Премиальная награда из оптического хрусталя с гравировкой',
-    features: ['Оптический хрусталь', 'Лазерная гравировка', 'Подарочная упаковка'],
+    image: '🏆'
   },
   {
     id: 2,
-    title: 'Золотая звезда Героя',
-    category: 'Государственные',
-    price: 'от 120 000 ₽',
-    image: '⭐',
-    description: 'Эксклюзивная награда из золота 585 пробы с эмалью',
-    features: ['Золото 585°', 'Ручная эмаль', 'Сертификат подлинности'],
+    title: 'Статуэтка "Признание"',
+    category: 'Статуэтки',
+    occasion: 'Юбилей',
+    recipient: 'Партнеру',
+    price: 'от 65 000 ₽',
+    image: '⭐'
   },
   {
     id: 3,
-    title: 'Премиум набор руководителя',
-    category: 'Подарки',
-    price: 'от 85 000 ₽',
-    image: '💼',
-    description: 'Набор из итальянской кожи с персонализацией',
-    features: ['Итальянская кожа', 'Швейцарские часы', 'Индивидуальная гравировка'],
+    title: 'Плакетка с гравировкой',
+    category: 'Плакетки',
+    occasion: 'Конференция',
+    recipient: 'Спикеру',
+    price: 'от 25 000 ₽',
+    image: '🎯'
   },
   {
     id: 4,
-    title: 'Кубок Победителя',
-    category: 'Спортивные',
-    price: 'от 65 000 ₽',
-    image: '🥇',
-    description: 'Эксклюзивный кубок с золотым напылением',
-    features: ['Золотое напыление', 'Мраморная подставка', '3D гравировка'],
+    title: 'Награда "Инновация"',
+    category: 'Кубки',
+    occasion: 'Конкурс',
+    recipient: 'Команде',
+    price: 'от 80 000 ₽',
+    image: '🥇'
   },
   {
     id: 5,
-    title: 'Корпоративный щит',
-    category: 'Корпоративные',
-    price: 'от 55 000 ₽',
-    image: '🛡️',
-    description: 'Настенный щит с логотипом компании',
-    features: ['Латунь с патиной', 'Объёмный логотип', 'Крепление в комплекте'],
+    title: 'Подарочный набор VIP',
+    category: 'Наборы',
+    occasion: 'Деловая встреча',
+    recipient: 'Клиенту',
+    price: 'от 120 000 ₽',
+    image: '💼'
   },
   {
     id: 6,
-    title: 'Статуэтка "Лидер"',
-    category: 'Награды',
-    price: 'от 95 000 ₽',
-    image: '🗿',
-    description: 'Бронзовая статуэтка работы известного скульптора',
-    features: ['Авторская работа', 'Бронза ЛМЦ', 'Нумерованный тираж'],
-  },
+    title: 'Медаль "Достижение"',
+    category: 'Медали',
+    occasion: 'Спортивное событие',
+    recipient: 'Спортсмену',
+    price: 'от 18 000 ₽',
+    image: '🥉'
+  }
 ];
 
-const categories = ['Все', 'Награды', 'Государственные', 'Подарки', 'Спортивные', 'Корпоративные'];
+const categories = ['Все', 'Кубки', 'Статуэтки', 'Плакетки', 'Медали', 'Наборы'];
+const occasions = ['Все', 'Корпоративное мероприятие', 'Юбилей', 'Конференция', 'Конкурс', 'Деловая встреча', 'Спортивное событие'];
+const recipients = ['Все', 'Руководителю', 'Партнеру', 'Спикеру', 'Команде', 'Клиенту', 'Спортсмену'];
 
 interface CatalogProps {
   onSelectForAI?: (product: Product) => void;
@@ -79,116 +81,117 @@ interface CatalogProps {
 
 export default function Catalog({ onSelectForAI }: CatalogProps) {
   const [activeCategory, setActiveCategory] = useState('Все');
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [activeOccasion, setActiveOccasion] = useState('Все');
+  const [activeRecipient, setActiveRecipient] = useState('Все');
 
-  const filteredProducts = activeCategory === 'Все' 
-    ? products 
-    : products.filter(p => p.category === activeCategory);
-
-  const scrollToContact = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const filteredProducts = products.filter(p => {
+    const categoryMatch = activeCategory === 'Все' || p.category === activeCategory;
+    const occasionMatch = activeOccasion === 'Все' || p.occasion === activeOccasion;
+    const recipientMatch = activeRecipient === 'Все' || p.recipient === activeRecipient;
+    return categoryMatch && occasionMatch && recipientMatch;
+  });
 
   return (
-    <section id="catalog" className="py-24 bg-background">
+    <section id="catalog" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <Badge variant="outline" className="mb-4">
-            <Icon name="Grid3x3" className="mr-2" size={14} />
-            Каталог продукции
-          </Badge>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            Наши награды и подарки
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            Эксклюзивная коллекция премиальных наград, созданных для особых событий и выдающихся достижений
-          </p>
-        </div>
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-primary">
+          Каталог наград и подарков
+        </h2>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={activeCategory === category ? 'default' : 'outline'}
-              onClick={() => setActiveCategory(category)}
-              className="transition-all"
-            >
-              {category}
-            </Button>
-          ))}
+        <div className="mb-12 space-y-6">
+          <div>
+            <p className="text-sm font-medium mb-3 text-muted-foreground">Тип награды</p>
+            <div className="flex flex-wrap gap-2">
+              {categories.map(cat => (
+                <Button
+                  key={cat}
+                  variant={activeCategory === cat ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setActiveCategory(cat)}
+                  className="rounded-full"
+                >
+                  {cat}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="text-sm font-medium mb-3 text-muted-foreground">Тип мероприятия</p>
+            <div className="flex flex-wrap gap-2">
+              {occasions.map(occ => (
+                <Button
+                  key={occ}
+                  variant={activeOccasion === occ ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setActiveOccasion(occ)}
+                  className="rounded-full"
+                >
+                  {occ}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="text-sm font-medium mb-3 text-muted-foreground">Кому дарят</p>
+            <div className="flex flex-wrap gap-2">
+              {recipients.map(rec => (
+                <Button
+                  key={rec}
+                  variant={activeRecipient === rec ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setActiveRecipient(rec)}
+                  className="rounded-full"
+                >
+                  {rec}
+                </Button>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
-            <Card 
+          {filteredProducts.map((product, index) => (
+            <Card
               key={product.id}
-              className="group overflow-hidden border-2 hover:border-primary/50 transition-all duration-300 cursor-pointer"
-              onMouseEnter={() => setHoveredId(product.id)}
-              onMouseLeave={() => setHoveredId(null)}
+              className="overflow-hidden hover:shadow-xl transition-shadow duration-300 animate-scale-in"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="aspect-square bg-gradient-to-br from-muted/30 to-muted/60 flex items-center justify-center text-8xl relative overflow-hidden">
-                <div className={`transition-transform duration-500 ${hoveredId === product.id ? 'scale-110' : 'scale-100'}`}>
-                  {product.image}
-                </div>
-                <div className={`absolute inset-0 bg-primary/10 transition-opacity ${hoveredId === product.id ? 'opacity-100' : 'opacity-0'}`} />
+              <div className="aspect-square bg-muted relative overflow-hidden flex items-center justify-center text-8xl">
+                {product.image}
+                <Badge className="absolute top-4 right-4 bg-secondary">
+                  {product.category}
+                </Badge>
               </div>
-
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <Badge variant="secondary" className="text-xs">
-                    {product.category}
-                  </Badge>
-                  <span className="text-lg font-bold text-primary">
-                    {product.price}
-                  </span>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+                  <Icon name="Calendar" size={16} />
+                  <span>{product.occasion}</span>
                 </div>
-
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
-                  {product.title}
-                </h3>
-
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  {product.description}
-                </p>
-
-                <div className="space-y-2 mb-6">
-                  {product.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-sm">
-                      <Icon name="Check" className="text-primary flex-shrink-0" size={16} />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
+                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+                  <Icon name="User" size={16} />
+                  <span>{product.recipient}</span>
                 </div>
-
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-lg font-semibold text-primary">{product.price}</p>
+                </div>
                 <div className="grid grid-cols-2 gap-2">
-                  <Button 
-                    variant="outline"
-                    onClick={scrollToContact}
-                    className="group/btn"
-                  >
-                    Заказать
+                  <Button variant="outline" size="sm">
+                    Подробнее
                   </Button>
                   <Button 
+                    size="sm"
                     onClick={() => onSelectForAI?.(product)}
-                    className="group/btn"
                   >
-                    <Icon name="Sparkles" className="mr-1" size={16} />
+                    <Icon name="Sparkles" className="mr-1" size={14} />
                     AI макет
                   </Button>
                 </div>
-              </div>
+              </CardContent>
             </Card>
           ))}
-        </div>
-
-        <div className="text-center mt-16">
-          <p className="text-lg text-muted-foreground mb-6">
-            Не нашли подходящий вариант?
-          </p>
-          <Button size="lg" variant="outline" onClick={scrollToContact}>
-            <Icon name="Lightbulb" className="mr-2" size={20} />
-            Создать индивидуальный дизайн
-          </Button>
         </div>
       </div>
     </section>
