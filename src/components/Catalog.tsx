@@ -73,7 +73,11 @@ const products: Product[] = [
 
 const categories = ['Все', 'Награды', 'Государственные', 'Подарки', 'Спортивные', 'Корпоративные'];
 
-export default function Catalog() {
+interface CatalogProps {
+  onSelectForAI?: (product: Product) => void;
+}
+
+export default function Catalog({ onSelectForAI }: CatalogProps) {
   const [activeCategory, setActiveCategory] = useState('Все');
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
@@ -156,17 +160,22 @@ export default function Catalog() {
                   ))}
                 </div>
 
-                <Button 
-                  className="w-full group/btn"
-                  onClick={scrollToContact}
-                >
-                  Заказать
-                  <Icon 
-                    name="ArrowRight" 
-                    className="ml-2 group-hover/btn:translate-x-1 transition-transform" 
-                    size={18} 
-                  />
-                </Button>
+                <div className="grid grid-cols-2 gap-2">
+                  <Button 
+                    variant="outline"
+                    onClick={scrollToContact}
+                    className="group/btn"
+                  >
+                    Заказать
+                  </Button>
+                  <Button 
+                    onClick={() => onSelectForAI?.(product)}
+                    className="group/btn"
+                  >
+                    <Icon name="Sparkles" className="mr-1" size={16} />
+                    AI макет
+                  </Button>
+                </div>
               </div>
             </Card>
           ))}

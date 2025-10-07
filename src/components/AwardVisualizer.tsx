@@ -14,7 +14,7 @@ interface Award {
   basePrice: number;
 }
 
-const awards: Award[] = [
+const defaultAwards: Award[] = [
   { id: 1, title: 'Кристальная звезда', emoji: '🏆', basePrice: 45000 },
   { id: 2, title: 'Золотая звезда Героя', emoji: '⭐', basePrice: 120000 },
   { id: 3, title: 'Кубок Победителя', emoji: '🥇', basePrice: 65000 },
@@ -23,8 +23,27 @@ const awards: Award[] = [
   { id: 6, title: 'Бронзовая медаль', emoji: '🥉', basePrice: 35000 },
 ];
 
-export default function AwardVisualizer() {
-  const [selectedAward, setSelectedAward] = useState<Award | null>(null);
+interface AwardVisualizerProps {
+  preselectedAward?: {
+    title: string;
+    price: string;
+    image: string;
+  };
+}
+
+export default function AwardVisualizer({ preselectedAward }: AwardVisualizerProps) {
+  const [selectedAward, setSelectedAward] = useState<Award | null>(() => {
+    if (preselectedAward) {
+      const priceNum = parseInt(preselectedAward.price.replace(/\D/g, ''));
+      return {
+        id: Date.now(),
+        title: preselectedAward.title,
+        emoji: preselectedAward.image,
+        basePrice: priceNum || 45000,
+      };
+    }
+    return null;
+  });
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string>('');
   const [engraving, setEngraving] = useState('');
@@ -174,10 +193,22 @@ photorealistic, 8k resolution, professional photography`;
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-6">
             <Card className="p-6">
-              <h3 className="text-2xl font-semibold mb-6">Шаг 1: Выберите награду</h3>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-semibold">Шаг 1: Выберите награду</h3>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  <Icon name="Grid3x3" className="mr-2" size={16} />
+                  Из каталога
+                </Button>
+              </div>
               
               <div className="grid grid-cols-3 gap-4">
-                {awards.map((award) => (
+                {defaultAwards.map((award) => (
                   <div
                     key={award.id}
                     onClick={() => setSelectedAward(award)}
