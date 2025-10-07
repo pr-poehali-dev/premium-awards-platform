@@ -10,6 +10,7 @@ interface Technology {
   shortDesc: string;
   fullDesc: string;
   applications: string[];
+  gallery?: string[];
 }
 
 const technologies: Technology[] = [
@@ -25,6 +26,12 @@ const technologies: Technology[] = [
       'Инкапсуляция объектов',
       'Имитация янтаря и камня',
       'Цветные композиции'
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1635776062127-d379bfcba9f8?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1618519764620-7403abdbdfe9?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1616401784845-180882ba9ba8?w=400&h=400&fit=crop'
     ]
   },
   {
@@ -39,6 +46,12 @@ const technologies: Technology[] = [
       'Создание серийных наград',
       'Копирование сложных рельефов',
       'Формы для шоколада и мыла'
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1590650153855-d9e808231d41?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=400&fit=crop'
     ]
   },
   {
@@ -53,6 +66,12 @@ const technologies: Technology[] = [
       'Сложные декоративные элементы',
       'Индивидуальный дизайн',
       'Быстрое производство малых серий'
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1604187351574-c75ca79f5807?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=400&h=400&fit=crop'
     ]
   },
   {
@@ -151,6 +170,12 @@ const technologies: Technology[] = [
       'Фотогравировка',
       'Серийные номера',
       'Резка сложных контуров'
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1565372195458-9de0b320ef04?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1565372195868-33102a9555c4?w=400&h=400&fit=crop'
     ]
   },
   {
@@ -207,6 +232,12 @@ const technologies: Technology[] = [
       'Создание мастер-моделей',
       'Обработка больших заготовок',
       'Серийное производство деталей'
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1565372195458-9de0b320ef04?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1581092918484-8313e1f7e8d6?w=400&h=400&fit=crop'
     ]
   }
 ];
@@ -294,8 +325,28 @@ export default function AboutPage() {
                     </div>
 
                     {expandedTech === tech.id && (
-                      <div className="animate-fade-in space-y-4 pt-4 border-t">
+                      <div className="animate-fade-in space-y-6 pt-4 border-t">
                         <p className="text-foreground leading-relaxed">{tech.fullDesc}</p>
+                        
+                        {tech.gallery && (
+                          <div>
+                            <h4 className="font-semibold mb-3 flex items-center gap-2">
+                              <Icon name="Image" size={18} className="text-primary" />
+                              Примеры работ:
+                            </h4>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                              {tech.gallery.map((img, idx) => (
+                                <div key={idx} className="aspect-square rounded-lg overflow-hidden border border-border/50 hover:border-primary/50 transition-colors">
+                                  <img
+                                    src={img}
+                                    alt={`${tech.name} - пример ${idx + 1}`}
+                                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                         
                         <div>
                           <h4 className="font-semibold mb-3 flex items-center gap-2">
