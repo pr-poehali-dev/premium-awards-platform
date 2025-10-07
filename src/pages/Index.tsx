@@ -131,6 +131,9 @@ const Index = () => {
               <a href="#about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
                 О компании
               </a>
+              <a href="#production" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                Производство
+              </a>
               <a href="#order" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
                 Индивидуальный заказ
               </a>
@@ -167,6 +170,13 @@ const Index = () => {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     О компании
+                  </a>
+                  <a
+                    href="#production"
+                    className="text-lg font-medium"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Производство
                   </a>
                   <a
                     href="#order"
@@ -352,6 +362,127 @@ const Index = () => {
               Наша команда дизайнеров и мастеров создает уникальные награды, 
               которые подчеркивают статус получателя и значимость момента.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="production" className="py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-primary">
+            Производство
+          </h2>
+          <p className="text-center text-muted-foreground mb-16 text-lg max-w-2xl mx-auto">
+            Каждая награда проходит путь от идеи до готового изделия через несколько этапов
+          </p>
+
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+              <Card className="text-center p-6 hover:shadow-xl transition-shadow animate-fade-in">
+                <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Icon name="Lightbulb" size={32} className="text-primary" />
+                </div>
+                <div className="text-3xl font-bold text-primary mb-2">01</div>
+                <h3 className="text-xl font-semibold mb-3">Концепция</h3>
+                <p className="text-muted-foreground">
+                  Обсуждение идеи, подбор материалов и создание эскизов
+                </p>
+              </Card>
+
+              <Card className="text-center p-6 hover:shadow-xl transition-shadow animate-fade-in" style={{ animationDelay: '0.1s' }}>
+                <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Icon name="Palette" size={32} className="text-primary" />
+                </div>
+                <div className="text-3xl font-bold text-primary mb-2">02</div>
+                <h3 className="text-xl font-semibold mb-3">Дизайн</h3>
+                <p className="text-muted-foreground">
+                  3D-визуализация и согласование финального варианта
+                </p>
+              </Card>
+
+              <Card className="text-center p-6 hover:shadow-xl transition-shadow animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Icon name="Hammer" size={32} className="text-primary" />
+                </div>
+                <div className="text-3xl font-bold text-primary mb-2">03</div>
+                <h3 className="text-xl font-semibold mb-3">Изготовление</h3>
+                <p className="text-muted-foreground">
+                  Создание награды из премиальных материалов мастерами
+                </p>
+              </Card>
+
+              <Card className="text-center p-6 hover:shadow-xl transition-shadow animate-fade-in" style={{ animationDelay: '0.3s' }}>
+                <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Icon name="Sparkles" size={32} className="text-primary" />
+                </div>
+                <div className="text-3xl font-bold text-primary mb-2">04</div>
+                <h3 className="text-xl font-semibold mb-3">Финализация</h3>
+                <p className="text-muted-foreground">
+                  Гравировка, упаковка и доставка готовой награды
+                </p>
+              </Card>
+            </div>
+
+            <div className="bg-muted/30 rounded-lg p-8 md:p-12">
+              <h3 className="text-3xl font-bold mb-8 text-center text-primary">Персонализация</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="flex gap-4 animate-fade-in">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center">
+                      <Icon name="Type" size={24} className="text-secondary" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold mb-2">Гравировка</h4>
+                    <p className="text-muted-foreground">
+                      Лазерная или ручная гравировка любого текста, логотипов и изображений
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center">
+                      <Icon name="Gem" size={24} className="text-secondary" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold mb-2">Материалы</h4>
+                    <p className="text-muted-foreground">
+                      Выбор из благородных металлов, хрусталя, дерева премиум-пород
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center">
+                      <Icon name="Package" size={24} className="text-secondary" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold mb-2">Упаковка</h4>
+                    <p className="text-muted-foreground">
+                      Индивидуальная упаковка с брендированием под ваш корпоративный стиль
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center">
+                      <Icon name="Award" size={24} className="text-secondary" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold mb-2">Уникальный дизайн</h4>
+                    <p className="text-muted-foreground">
+                      Разработка эксклюзивной формы и дизайна специально для вас
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
