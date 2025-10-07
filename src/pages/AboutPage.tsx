@@ -114,6 +114,12 @@ const technologies: Technology[] = [
       'Многослойные композиции',
       'Гравировка внутри блока',
       'Комбинированные конструкции'
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1621274790572-7c32596bc67f?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1634712282287-14ed57b9cc89?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1618556450994-a6a128ef0d9d?w=400&h=400&fit=crop'
     ]
   },
   {
@@ -128,6 +134,12 @@ const technologies: Technology[] = [
       'Барельефы',
       'Декоративная фурнитура',
       'Медали и значки'
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1599481238640-4c1288750d7a?w=400&h=400&fit=crop'
     ]
   },
   {
@@ -142,6 +154,12 @@ const technologies: Technology[] = [
       'Металлические корпуса наград',
       'Комбинированные конструкции',
       'Фурнитура и механизмы'
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=400&fit=crop'
     ]
   },
   {
@@ -156,6 +174,12 @@ const technologies: Technology[] = [
       'Фотопечать на акриле',
       'Брендирование подарков',
       'Персонализация изделий'
+    ],
+    gallery: [
+      'https://images.unsplash.com/photo-1611068813580-c88c1b6eed1c?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1565372195458-9de0b320ef04?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1563089145-599997674d42?w=400&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=400&h=400&fit=crop'
     ]
   },
   {
