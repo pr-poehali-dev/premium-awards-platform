@@ -151,41 +151,42 @@ export default function Catalog({ onSelectForAI }: CatalogProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
           {filteredProducts.map((product, index) => (
             <Card
               key={product.id}
               className="overflow-hidden hover:shadow-xl transition-shadow duration-300 animate-scale-in"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="aspect-square bg-muted relative overflow-hidden flex items-center justify-center text-8xl">
+              <div className="aspect-square bg-muted relative overflow-hidden flex items-center justify-center text-4xl md:text-8xl">
                 {product.image}
-                <Badge className="absolute top-4 right-4 bg-secondary">
+                <Badge className="absolute top-2 right-2 md:top-4 md:right-4 bg-secondary text-[10px] md:text-xs px-1.5 py-0.5 md:px-2.5 md:py-0.5">
                   {product.category}
                 </Badge>
               </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+              <CardContent className="p-3 md:p-6">
+                <h3 className="text-sm md:text-xl font-semibold mb-1 md:mb-2 line-clamp-2">{product.title}</h3>
+                <div className="hidden md:flex items-center gap-2 text-sm text-muted-foreground mb-4">
                   <Icon name="Calendar" size={16} />
                   <span>{product.occasion}</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+                <div className="hidden md:flex items-center gap-2 text-sm text-muted-foreground mb-4">
                   <Icon name="User" size={16} />
                   <span>{product.recipient}</span>
                 </div>
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-lg font-semibold text-primary">{product.price}</p>
+                <div className="flex items-center justify-between mb-2 md:mb-4">
+                  <p className="text-xs md:text-lg font-semibold text-primary">{product.price}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <Button variant="outline" size="sm">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-2">
+                  <Button variant="outline" size="sm" className="text-xs md:text-sm h-7 md:h-9 hidden md:flex">
                     Подробнее
                   </Button>
                   <Button 
                     size="sm"
                     onClick={() => onSelectForAI?.(product)}
+                    className="text-xs md:text-sm h-7 md:h-9 w-full"
                   >
-                    <Icon name="Sparkles" className="mr-1" size={14} />
+                    <Icon name="Sparkles" className="mr-1" size={12} />
                     AI макет
                   </Button>
                 </div>
