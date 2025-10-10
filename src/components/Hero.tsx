@@ -25,12 +25,37 @@ const images = [
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isGalleryVisible, setIsGalleryVisible] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % images.length);
     }, 5000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsGalleryVisible(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const gallerySection = document.getElementById('gallery-section');
+    if (gallerySection) {
+      observer.observe(gallerySection);
+    }
+
+    return () => {
+      if (gallerySection) {
+        observer.unobserve(gallerySection);
+      }
+    };
   }, []);
 
   const scrollToCatalog = () => {
@@ -214,11 +239,22 @@ export default function Hero() {
         </div>
       </section>
 
+      {/* Transition Divider */}
+      <div className="relative h-32 bg-gradient-to-b from-black/50 to-background overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik0gNDAgMCBMIDAgMCAwIDQwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjUwLDIzOCwyMjUsMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-30" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
+      </div>
+
       {/* Gallery Section - Our Works */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4">
+      <section id="gallery-section" className="py-24 bg-background relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent opacity-50" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
+            <div className={`text-center mb-16 transition-all duration-1000 ${
+              isGalleryVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-10'
+            }`}>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">Наши работы</h2>
               <p className="text-xl text-muted-foreground">Эксклюзивные награды для первых лиц государства и бизнеса</p>
             </div>
@@ -240,7 +276,15 @@ export default function Hero() {
               ].map((item, idx) => (
                 <div 
                   key={idx} 
-                  className="group relative aspect-square rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all cursor-pointer hover:shadow-xl bg-card"
+                  className={`group relative aspect-square rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all cursor-pointer hover:shadow-xl bg-card ${
+                    isGalleryVisible 
+                      ? 'opacity-100 translate-y-0' 
+                      : 'opacity-0 translate-y-20'
+                  }`}
+                  style={{
+                    transitionDelay: `${idx * 100}ms`,
+                    transitionDuration: '800ms'
+                  }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70 z-10" />
                   {item.image ? (
