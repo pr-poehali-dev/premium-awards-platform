@@ -55,7 +55,7 @@ export default function Hero() {
                 <Button 
                   size="lg" 
                   onClick={scrollToCatalog}
-                  className="text-lg px-8 py-6 h-auto shadow-lg hover:shadow-xl transition-all"
+                  className="text-lg px-8 py-6 h-auto shadow-lg hover:shadow-xl transition-all bg-primary text-background hover:bg-primary/90"
                 >
                   <Icon name="Sparkles" className="mr-2" size={20} />
                   Посмотреть каталог
@@ -65,7 +65,7 @@ export default function Hero() {
                   variant="outline" 
                   size="lg"
                   onClick={scrollToContact}
-                  className="text-lg px-8 py-6 h-auto border-2 border-[#FAEEE1] text-[#FAEEE1] hover:bg-[#FAEEE1] hover:text-[#191919] backdrop-blur-sm"
+                  className="text-lg px-8 py-6 h-auto border-2 border-[#FAEEE1] bg-transparent text-[#FAEEE1] hover:bg-[#FAEEE1] hover:text-[#191919] backdrop-blur-sm"
                 >
                   <Icon name="MessageCircle" className="mr-2" size={20} />
                   Получить консультацию
