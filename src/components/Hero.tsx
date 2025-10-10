@@ -34,11 +34,11 @@ export default function Hero() {
             <div className="space-y-8 animate-fade-in">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FAEEE1]/20 border border-[#FAEEE1]/30 backdrop-blur-sm">
                 <Icon name="Award" className="text-[#FAEEE1]" size={18} />
-                <span className="text-sm subheading text-[#FAEEE1]">Награды премиум-класса</span>
+                <span className="text-sm subheading text-[#FAEEE1]">Когда нельзя ошибиться</span>
               </div>
 
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-[#FAEEE1]">
-                Премиальные награды
+                Награды
                 <span className="block mt-2">для первых лиц</span>
               </h1>
 
@@ -75,7 +75,7 @@ export default function Hero() {
               <div className="grid grid-cols-2 gap-4 pt-8">
                 {[
                   { icon: 'Trophy', label: 'Индивидуальный дизайн', desc: 'Уникальные концепции' },
-                  { icon: 'Gem', label: 'Премиум материалы', desc: 'Золото, хрусталь, камень' },
+                  { icon: 'Gem', label: 'Лучшие материалы', desc: 'Золото, хрусталь, камень' },
                   { icon: 'Clock', label: 'От 7 дней', desc: 'Срочное производство' },
                   { icon: 'Shield', label: '100% гарантия', desc: 'Качество и сроки' },
                 ].map((feature, idx) => (
