@@ -107,15 +107,15 @@ export default function Catalog({ onSelectForAI }: CatalogProps) {
         onOpenChange={setIsModalOpen}
         onSelectForAI={onSelectForAI}
       />
-    <section id="catalog" className="py-20 bg-[#191919]">
+    <section id="catalog" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-[#FAEEE1]">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-primary">
           Каталог наград и подарков
         </h2>
 
         <div className="mb-12 space-y-6">
           <div>
-            <p className="text-sm subheading mb-3 text-[#FAEEE1]/70">Тип награды</p>
+            <p className="text-sm subheading mb-3 text-muted-foreground">Тип награды</p>
             <div className="flex flex-wrap gap-2">
               {categories.map(cat => (
                 <Button
@@ -132,7 +132,7 @@ export default function Catalog({ onSelectForAI }: CatalogProps) {
           </div>
 
           <div>
-            <p className="text-sm subheading mb-3 text-[#FAEEE1]/70">Тип мероприятия</p>
+            <p className="text-sm subheading mb-3 text-muted-foreground">Тип мероприятия</p>
             <div className="flex flex-wrap gap-2">
               {occasions.map(occ => (
                 <Button
@@ -149,7 +149,7 @@ export default function Catalog({ onSelectForAI }: CatalogProps) {
           </div>
 
           <div>
-            <p className="text-sm font-medium mb-3 text-[#FAEEE1]/70">Кому дарят</p>
+            <p className="text-sm font-medium mb-3 text-muted-foreground">Кому дарят</p>
             <div className="flex flex-wrap gap-2">
               {recipients.map(rec => (
                 <Button
