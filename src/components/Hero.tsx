@@ -75,7 +75,7 @@ export default function Hero() {
             <div className="space-y-6 md:space-y-8 animate-fade-in pb-20 md:pb-0">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FAEEE1]/20 border border-[#FAEEE1]/30 backdrop-blur-sm">
                 <Icon name="Award" className="text-[#FAEEE1]" size={18} />
-                <span className="text-sm subheading text-[#FAEEE1]">Когда нельзя ошибиться</span>
+                <span className="text-sm subheading text-[#FAEEE1]">МЫ ЗНАЕМ, ЧТО ПОДАРИТЬ</span>
               </div>
 
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-[#FAEEE1]">
