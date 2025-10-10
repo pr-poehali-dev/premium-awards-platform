@@ -22,6 +22,20 @@ export default function Hero() {
               'https://cdn.poehali.dev/files/fe732047-cbac-471c-a126-c1e2b67aa34e.jpg',
               'https://cdn.poehali.dev/files/bd743598-2856-404c-a117-5b45e4b09746.jpg',
               'https://cdn.poehali.dev/files/65f8b763-6238-4587-a7ca-a8b5275d2bb3.jpg',
+              'https://cdn.poehali.dev/files/4358e6e7-ebdc-4187-992d-8531db32bad3.jpg',
+              'https://cdn.poehali.dev/files/d41669eb-dd43-4a06-9c15-ebc49899d5d7.jpg',
+              'https://cdn.poehali.dev/files/88196ba4-896e-41de-8aa0-df206f0574b0.jpg',
+              'https://cdn.poehali.dev/files/c9621737-8774-46ce-86b1-5b6e4f218017.jpg',
+              'https://cdn.poehali.dev/files/260284e9-c71d-4330-a54c-be76fc375800.jpg',
+              'https://cdn.poehali.dev/files/584c73e7-cd8b-4179-ab3b-c81d88eaad60.jpg',
+              'https://cdn.poehali.dev/files/4622e2e0-4e0e-4484-b429-6c834b219b2e.jpg',
+              'https://cdn.poehali.dev/files/170b56f4-a888-4b42-98a8-83ff6879ee68.jpg',
+              'https://cdn.poehali.dev/files/8c4a9ba5-2846-402e-9c22-f28614f4973b.jpg',
+              'https://cdn.poehali.dev/files/33d23758-2590-423f-9231-0c7c1c74c3f3.jpg',
+              'https://cdn.poehali.dev/files/9cb6b7ee-97f0-4831-892f-d04423b67547.jpg',
+              'https://cdn.poehali.dev/files/2e9466db-3915-4380-9c08-a6fc08ae0997.jpg',
+              'https://cdn.poehali.dev/files/53c6ae72-5bca-4376-9de7-b24c48a42d8e.jpg',
+              'https://cdn.poehali.dev/files/460b76a3-ac0b-4921-8db3-1374b476790b.jpg',
             ].map((img, idx) => (
               <div
                 key={idx}
@@ -30,7 +44,7 @@ export default function Hero() {
                   backgroundImage: `url(${img})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
-                  animation: `slideshow 20s infinite`,
+                  animation: `slideshow 90s infinite`,
                   animationDelay: `${idx * 5}s`,
                 }}
               />
