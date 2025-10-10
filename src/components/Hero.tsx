@@ -101,27 +101,61 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* Why Choose Us Section - Below Video */}
+      {/* Gallery Section - Our Works */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">Почему выбирают нас</h2>
-              <p className="text-xl text-muted-foreground">Доверие ведущих компаний и государственных структур</p>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">Наши работы</h2>
+              <p className="text-xl text-muted-foreground">Эксклюзивные награды для первых лиц государства и бизнеса</p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+              {[
+                { emoji: '🏆', title: 'Кубок Президента', category: 'Государственные церемонии' },
+                { emoji: '⭐', title: 'Золотая Звезда Героя', category: 'Награды высшего уровня' },
+                { emoji: '🎖️', title: 'Орден За Заслуги', category: 'Государственные награды' },
+                { emoji: '🥇', title: 'Медаль Победителя', category: 'Спортивные события' },
+                { emoji: '💎', title: 'Хрустальная Призма', category: 'Корпоративные награды' },
+                { emoji: '🛡️', title: 'Щит Почёта', category: 'Министерства и ведомства' },
+                { emoji: '🎭', title: 'Маска Театра', category: 'Культурные мероприятия' },
+                { emoji: '📜', title: 'Памятный Диплом', category: 'Юбилейные события' },
+                { emoji: '🗿', title: 'Статуэтка Лидера', category: 'Бизнес-премии' },
+                { emoji: '🎨', title: 'Арт-объект', category: 'Эксклюзивные решения' },
+                { emoji: '⚡', title: 'Кубок Инноваций', category: 'IT и технологии' },
+                { emoji: '🌟', title: 'Звезда Года', category: 'Корпоративные премии' },
+              ].map((item, idx) => (
+                <div 
+                  key={idx} 
+                  className="group relative aspect-square rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all cursor-pointer hover:shadow-xl bg-card"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70 z-10" />
+                  <div className="w-full h-full flex items-center justify-center text-8xl transform group-hover:scale-110 transition-transform duration-500">
+                    {item.emoji}
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                    <p className="text-white font-bold text-sm mb-1">{item.title}</p>
+                    <p className="text-white/70 text-xs">{item.category}</p>
+                  </div>
+                  <div className="absolute top-3 right-3 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                    <Icon name="Play" className="text-white" size={20} />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid md:grid-cols-4 gap-8 p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-border">
               {[
                 { num: '15+', label: 'лет опыта', icon: 'Calendar' },
-                { num: '500+', label: 'проектов реализовано', icon: 'CheckCircle' },
+                { num: '500+', label: 'реализованных проектов', icon: 'CheckCircle' },
                 { num: '98%', label: 'клиентов возвращаются', icon: 'Heart' },
-                { num: '24/7', label: 'поддержка проектов', icon: 'Headphones' },
+                { num: '24/7', label: 'поддержка VIP-клиентов', icon: 'Headphones' },
               ].map((stat, idx) => (
-                <div key={idx} className="flex flex-col items-center text-center p-6 rounded-2xl border border-border bg-card hover:shadow-lg transition-all group">
-                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <Icon name={stat.icon as any} className="text-primary" size={32} />
+                <div key={idx} className="flex flex-col items-center text-center">
+                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                    <Icon name={stat.icon as any} className="text-primary" size={28} />
                   </div>
-                  <div className="text-4xl font-bold text-primary mb-2">{stat.num}</div>
+                  <div className="text-3xl font-bold text-primary mb-1">{stat.num}</div>
                   <div className="text-sm text-muted-foreground">{stat.label}</div>
                 </div>
               ))}
