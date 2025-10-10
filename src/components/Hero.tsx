@@ -30,7 +30,7 @@ export default function Hero() {
             <div className="space-y-8 animate-fade-in">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
                 <Icon name="Award" className="text-primary" size={18} />
-                <span className="text-sm font-medium text-primary">Награды премиум-класса</span>
+                <span className="text-sm subheading text-primary">Награды премиум-класса</span>
               </div>
 
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">

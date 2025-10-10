@@ -115,7 +115,7 @@ export default function Catalog({ onSelectForAI }: CatalogProps) {
 
         <div className="mb-12 space-y-6">
           <div>
-            <p className="text-sm font-medium mb-3 text-muted-foreground">Тип награды</p>
+            <p className="text-sm subheading mb-3 text-muted-foreground">Тип награды</p>
             <div className="flex flex-wrap gap-2">
               {categories.map(cat => (
                 <Button
@@ -132,7 +132,7 @@ export default function Catalog({ onSelectForAI }: CatalogProps) {
           </div>
 
           <div>
-            <p className="text-sm font-medium mb-3 text-muted-foreground">Тип мероприятия</p>
+            <p className="text-sm subheading mb-3 text-muted-foreground">Тип мероприятия</p>
             <div className="flex flex-wrap gap-2">
               {occasions.map(occ => (
                 <Button
