@@ -1,5 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600&display=swap");
+@font-face {
+  font-family: "Libertinus Sans";
+  src: url("/fonts/libertinussans-bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bert Sans";
+  src: url("/fonts/BertSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 @tailwind base;
 @tailwind components;
@@ -93,7 +106,7 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: "Work Sans", sans-serif;
+    font-family: "Bert Sans", sans-serif;
   }
 
   h1,
@@ -102,7 +115,7 @@
   h4,
   h5,
   h6 {
-    font-family: "Libre Baskerville", serif;
+    font-family: "Libertinus Sans", serif;
     font-weight: 700;
   }
 }
@@ -128,8 +141,8 @@
   }
 
   .subheading {
-    font-family: "Work Sans", sans-serif;
-    font-weight: 300;
+    font-family: "Bert Sans", sans-serif;
+    font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
