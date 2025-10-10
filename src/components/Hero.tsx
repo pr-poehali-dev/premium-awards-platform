@@ -225,7 +225,7 @@ export default function Hero() {
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
               {[
-                { emoji: '🏆', title: 'Кубок Президента', category: 'Государственные церемонии' },
+                { image: 'https://cdn.poehali.dev/files/911cb605-99c6-402a-9316-1389bc2f8655.jpg', title: 'Хрустальные бокалы', category: 'Эксклюзивные подарки' },
                 { emoji: '⭐', title: 'Золотая Звезда Героя', category: 'Награды высшего уровня' },
                 { emoji: '🎖️', title: 'Орден За Заслуги', category: 'Государственные награды' },
                 { emoji: '🥇', title: 'Медаль Победителя', category: 'Спортивные события' },
@@ -243,9 +243,16 @@ export default function Hero() {
                   className="group relative aspect-square rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all cursor-pointer hover:shadow-xl bg-card"
                 >
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70 z-10" />
-                  <div className="w-full h-full flex items-center justify-center text-8xl transform group-hover:scale-110 transition-transform duration-500">
-                    {item.emoji}
-                  </div>
+                  {item.image ? (
+                    <div 
+                      className="w-full h-full bg-cover bg-center transform group-hover:scale-110 transition-transform duration-500"
+                      style={{ backgroundImage: `url(${item.image})` }}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-8xl transform group-hover:scale-110 transition-transform duration-500">
+                      {item.emoji}
+                    </div>
+                  )}
                   <div className="absolute bottom-0 left-0 right-0 p-4 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform">
                     <p className="text-white font-bold text-sm mb-1">{item.title}</p>
                     <p className="text-white/70 text-xs">{item.category}</p>
