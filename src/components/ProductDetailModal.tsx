@@ -20,7 +20,7 @@ const productDetails: Record<number, {
   advantages: { icon: string; title: string; description: string }[];
 }> = {
   1: {
-    description: 'Премиальный кубок "Лидерство" — символ высших достижений и признания заслуг. Изготовлен из латуни с покрытием под золото, дополнен основанием из натурального мрамора.',
+    description: 'Кубок "Лидерство" — символ высших достижений и признания заслуг. Изготовлен из латуни с покрытием под золото, дополнен основанием из натурального мрамора.',
     gallery: [
       'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&h=800&fit=crop',
       'https://images.unsplash.com/photo-1601524909162-ae8725290836?w=800&h=800&fit=crop',
@@ -44,7 +44,7 @@ const productDetails: Record<number, {
     advantages: [
       {
         icon: 'Award',
-        title: 'Премиальное качество',
+        title: 'Высшее качество',
         description: 'Изготовлено вручную мастерами с 15-летним опытом'
       },
       {
@@ -59,7 +59,7 @@ const productDetails: Record<number, {
       },
       {
         icon: 'Package',
-        title: 'Премиум упаковка',
+        title: 'Эксклюзивная упаковка',
         description: 'В подарочном деревянном футляре с бархатом'
       }
     ]
@@ -74,7 +74,7 @@ const productDetails: Record<number, {
     ],
     features: [
       'Высота 28 см',
-      'Эпоксидная смола премиум',
+      'Эпоксидная смола высшего качества',
       'Ручная роспись',
       'Металлическая табличка',
       'Индивидуальная упаковка'
@@ -99,7 +99,7 @@ const productDetails: Record<number, {
       },
       {
         icon: 'Star',
-        title: 'Премиум смола',
+        title: 'Высококачественная смола',
         description: 'Кристально чистый материал высшего качества'
       },
       {
@@ -224,7 +224,7 @@ const productDetails: Record<number, {
     advantages: [
       {
         icon: 'Crown',
-        title: 'Премиум класс',
+        title: 'Высший класс',
         description: 'Только лучшие материалы и бренды'
       },
       {

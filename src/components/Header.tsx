@@ -14,8 +14,12 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold tracking-tight text-primary">
-            Premium Awards
+          <Link to="/" className="flex items-center">
+            <img 
+              src="https://cdn.poehali.dev/files/22ce25dc-a953-4ec4-bfe3-9b8eaa50205b.png" 
+              alt="ART STEKLOV" 
+              className="h-10 md:h-12 w-auto"
+            />
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
