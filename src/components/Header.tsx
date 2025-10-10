@@ -23,12 +23,12 @@ export default function Header() {
 
   const shouldShowHeader = !isHomePage || isScrolled;
 
+  if (!shouldShowHeader) {
+    return null;
+  }
+
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${
-      shouldShowHeader 
-        ? 'border-b border-border bg-background/95 backdrop-blur translate-y-0' 
-        : '-translate-y-full'
-    }`}>
+    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur transition-all duration-300 animate-in slide-in-from-top">
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
