@@ -1,9 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Catalog, { Product } from '@/components/Catalog';
 
 export default function CatalogPage() {
+  const navigate = useNavigate();
+
   const handleSelectForAI = (product: Product) => {
-    window.location.href = '/constructor';
+    navigate('/constructor', { state: { product } });
   };
 
   return (

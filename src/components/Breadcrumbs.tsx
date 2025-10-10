@@ -1,4 +1,4 @@
-
+import { Link, useLocation } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 
 interface BreadcrumbItem {
@@ -16,9 +16,8 @@ const routeMap: Record<string, string> = {
 };
 
 export default function Breadcrumbs() {
-  const pathnames = typeof window !== 'undefined' 
-    ? window.location.pathname.split('/').filter((x) => x)
-    : [];
+  const location = useLocation();
+  const pathnames = location.pathname.split('/').filter((x) => x);
 
   if (pathnames.length === 0) {
     return null;
@@ -48,12 +47,12 @@ export default function Breadcrumbs() {
               {isLast ? (
                 <span className="text-foreground font-medium">{crumb.label}</span>
               ) : (
-                <a
-                  href={crumb.path}
+                <Link
+                  to={crumb.path}
                   className="hover:text-primary transition-colors"
                 >
                   {crumb.label}
-                </a>
+                </Link>
               )}
             </li>
           );
