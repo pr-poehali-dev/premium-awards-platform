@@ -79,8 +79,8 @@ export default function Hero() {
               </div>
 
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-[#FAEEE1]">
-                Награды
-                <span className="block mt-2">для первых лиц</span>
+                Награды и подарки
+                <span className="block mt-2">для первых</span>
               </h1>
 
               <div className="space-y-3 md:space-y-4">
