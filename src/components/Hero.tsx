@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
@@ -67,6 +68,62 @@ export default function Hero() {
             ))}
           </div>
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+        </div>
+
+        {/* Logo and Navigation Overlay */}
+        <div className="absolute top-0 left-0 right-0 z-30 pt-6 md:pt-8">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between">
+              <Link to="/" className="flex items-center">
+                <img 
+                  src="https://cdn.poehali.dev/files/22ce25dc-a953-4ec4-bfe3-9b8eaa50205b.png" 
+                  alt="ART STEKLOV" 
+                  className="h-10 md:h-12 w-auto brightness-0 invert"
+                />
+              </Link>
+
+              <div className="hidden md:flex items-center gap-8">
+                <Link 
+                  to="/catalog" 
+                  className="text-sm font-medium text-[#FAEEE1] hover:text-white transition-colors"
+                >
+                  Каталог
+                </Link>
+                <Link 
+                  to="/portfolio" 
+                  className="text-sm font-medium text-[#FAEEE1] hover:text-white transition-colors"
+                >
+                  Портфолио
+                </Link>
+                <Link 
+                  to="/constructor" 
+                  className="text-sm font-medium text-[#FAEEE1] hover:text-white transition-colors"
+                >
+                  Конструктор
+                </Link>
+                <Link 
+                  to="/about" 
+                  className="text-sm font-medium text-[#FAEEE1] hover:text-white transition-colors"
+                >
+                  О компании
+                </Link>
+                <Link 
+                  to="/contact" 
+                  className="text-sm font-medium text-[#FAEEE1] hover:text-white transition-colors"
+                >
+                  Контакты
+                </Link>
+              </div>
+
+              <Button 
+                variant="ghost" 
+                size="icon"
+                className="md:hidden text-[#FAEEE1] hover:text-white hover:bg-[#FAEEE1]/10"
+              >
+                <Icon name="Menu" size={24} />
+              </Button>
+            </div>
+          </div>
         </div>
         
         <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
