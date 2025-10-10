@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
 const images = [
-  'https://cdn.poehali.dev/files/0927b776-464d-47c8-a300-0a7289fc0f77.jpg',
   'https://cdn.poehali.dev/files/fe732047-cbac-471c-a126-c1e2b67aa34e.jpg',
   'https://cdn.poehali.dev/files/bd743598-2856-404c-a117-5b45e4b09746.jpg',
   'https://cdn.poehali.dev/files/65f8b763-6238-4587-a7ca-a8b5275d2bb3.jpg',
@@ -52,7 +51,7 @@ export default function Hero() {
       <section className="relative min-h-screen flex items-center justify-start overflow-hidden">
         {/* Background Slideshow */}
         <div className="absolute inset-0 z-0">
-          <div className="slideshow-container w-full h-full">
+          <div className="slideshow-container w-full h-full fixed">
             {images.map((img, idx) => (
               <div
                 key={idx}
@@ -63,6 +62,7 @@ export default function Hero() {
                   backgroundImage: `url(${img})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
+                  backgroundAttachment: 'fixed',
                 }}
               />
             ))}
