@@ -69,34 +69,34 @@ export default function Hero() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
         </div>
         
-        <div className="container mx-auto px-4 py-20 relative z-10">
+        <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
           <div className="max-w-2xl">
             {/* Left Column - Text Content in Beige */}
-            <div className="space-y-8 animate-fade-in">
+            <div className="space-y-6 md:space-y-8 animate-fade-in pb-20 md:pb-0">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FAEEE1]/20 border border-[#FAEEE1]/30 backdrop-blur-sm">
                 <Icon name="Award" className="text-[#FAEEE1]" size={18} />
                 <span className="text-sm subheading text-[#FAEEE1]">Когда нельзя ошибиться</span>
               </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-[#FAEEE1]">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-[#FAEEE1]">
                 Награды
                 <span className="block mt-2">для первых лиц</span>
               </h1>
 
-              <div className="space-y-4">
-                <p className="text-xl md:text-2xl font-semibold text-[#FAEEE1]">
+              <div className="space-y-3 md:space-y-4">
+                <p className="text-lg md:text-xl lg:text-2xl font-semibold text-[#FAEEE1]">
                   Эксклюзивные решения для государственных церемоний и корпоративных событий
                 </p>
-                <p className="text-lg text-[#FAEEE1]/80 leading-relaxed">
+                <p className="text-base md:text-lg text-[#FAEEE1]/80 leading-relaxed">
                   Разрабатываем и производим уникальные награды для высшего руководства, политических деятелей и VIP-персон. Каждое изделие — произведение искусства с безупречным исполнением.
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                 <Button 
                   size="lg" 
                   onClick={scrollToCatalog}
-                  className="text-lg px-8 py-6 h-auto shadow-lg hover:shadow-xl transition-all bg-primary text-background hover:bg-primary/90"
+                  className="text-base md:text-lg px-6 md:px-8 py-5 md:py-6 h-auto shadow-lg hover:shadow-xl transition-all bg-primary text-background hover:bg-primary/90"
                 >
                   <Icon name="Sparkles" className="mr-2" size={20} />
                   Посмотреть каталог
@@ -106,14 +106,14 @@ export default function Hero() {
                   variant="outline" 
                   size="lg"
                   onClick={scrollToContact}
-                  className="text-lg px-8 py-6 h-auto border-2 border-[#FAEEE1] bg-transparent text-[#FAEEE1] hover:bg-[#FAEEE1] hover:text-[#191919] backdrop-blur-sm"
+                  className="text-base md:text-lg px-6 md:px-8 py-5 md:py-6 h-auto border-2 border-[#FAEEE1] bg-transparent text-[#FAEEE1] hover:bg-[#FAEEE1] hover:text-[#191919] backdrop-blur-sm"
                 >
                   <Icon name="MessageCircle" className="mr-2" size={20} />
                   Получить консультацию
                 </Button>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 pt-8">
+              <div className="hidden md:grid grid-cols-2 gap-4 pt-8">
                 {[
                   { icon: 'Trophy', label: 'Индивидуальный дизайн', desc: 'Уникальные концепции' },
                   { icon: 'ShieldCheck', label: 'Безопасность и анонимность', desc: 'Конфиденциальность гарантирована' },
@@ -138,7 +138,7 @@ export default function Hero() {
         </div>
 
         {/* Slideshow Dots Navigation */}
-        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        <div className="absolute bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 flex gap-2 z-20">
           {images.map((_, idx) => (
             <button
               key={idx}
@@ -153,7 +153,7 @@ export default function Hero() {
           ))}
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
           <Icon name="ChevronDown" className="text-[#FAEEE1]" size={32} />
         </div>
       </section>
