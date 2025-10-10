@@ -51,7 +51,7 @@ export default function Hero() {
       <section className="relative min-h-screen flex items-center justify-start overflow-hidden">
         {/* Background Slideshow */}
         <div className="absolute inset-0 z-0">
-          <div className="slideshow-container w-full h-full fixed">
+          <div className="slideshow-container w-full h-full">
             {images.map((img, idx) => (
               <div
                 key={idx}
@@ -62,7 +62,6 @@ export default function Hero() {
                   backgroundImage: `url(${img})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
-                  backgroundAttachment: 'fixed',
                 }}
               />
             ))}
