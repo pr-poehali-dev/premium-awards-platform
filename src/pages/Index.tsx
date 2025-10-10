@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import Hero from '@/components/Hero';
 import Catalog, { Product } from '@/components/Catalog';
 import Portfolio from '@/components/Portfolio';
@@ -6,10 +5,8 @@ import AwardVisualizer from '@/components/AwardVisualizer';
 import ContactForm from '@/components/ContactForm';
 
 const Index = () => {
-  const navigate = useNavigate();
-
   const handleSelectForAI = (product: Product) => {
-    navigate('/constructor', { state: { product } });
+    window.location.href = '/constructor';
   };
 
   return (

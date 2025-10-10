@@ -1,68 +1,67 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Icon from '@/components/ui/icon';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = useLocation();
+  const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => currentPath === path;
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
-          <Link to="/" className="flex items-center">
+          <a href="/" className="flex items-center">
             <img 
               src="https://cdn.poehali.dev/files/22ce25dc-a953-4ec4-bfe3-9b8eaa50205b.png" 
               alt="ART STEKLOV" 
               className="h-10 md:h-12 w-auto"
             />
-          </Link>
+          </a>
 
           <div className="hidden md:flex items-center gap-8">
-            <Link 
-              to="/catalog" 
+            <a 
+              href="/catalog" 
               className={`text-sm font-medium transition-colors ${
                 isActive('/catalog') ? 'text-primary' : 'text-foreground hover:text-primary'
               }`}
             >
               Каталог
-            </Link>
-            <Link 
-              to="/portfolio" 
+            </a>
+            <a 
+              href="/portfolio" 
               className={`text-sm font-medium transition-colors ${
                 isActive('/portfolio') ? 'text-primary' : 'text-foreground hover:text-primary'
               }`}
             >
               Портфолио
-            </Link>
-            <Link 
-              to="/constructor" 
+            </a>
+            <a 
+              href="/constructor" 
               className={`text-sm font-medium transition-colors ${
                 isActive('/constructor') ? 'text-primary' : 'text-foreground hover:text-primary'
               }`}
             >
               Конструктор
-            </Link>
-            <Link 
-              to="/about" 
+            </a>
+            <a 
+              href="/about" 
               className={`text-sm font-medium transition-colors ${
                 isActive('/about') ? 'text-primary' : 'text-foreground hover:text-primary'
               }`}
             >
               О компании
-            </Link>
-            <Link 
-              to="/contact" 
+            </a>
+            <a 
+              href="/contact" 
               className={`text-sm font-medium transition-colors ${
                 isActive('/contact') ? 'text-primary' : 'text-foreground hover:text-primary'
               }`}
             >
               Контакты
-            </Link>
+            </a>
           </div>
 
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
@@ -73,41 +72,41 @@ export default function Header() {
             </SheetTrigger>
             <SheetContent>
               <div className="flex flex-col gap-6 mt-8">
-                <Link
-                  to="/catalog"
+                <a
+                  href="/catalog"
                   className="text-lg font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Каталог
-                </Link>
-                <Link
-                  to="/portfolio"
+                </a>
+                <a
+                  href="/portfolio"
                   className="text-lg font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Портфолио
-                </Link>
-                <Link
-                  to="/constructor"
+                </a>
+                <a
+                  href="/constructor"
                   className="text-lg font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Конструктор
-                </Link>
-                <Link
-                  to="/about"
+                </a>
+                <a
+                  href="/about"
                   className="text-lg font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   О компании
-                </Link>
-                <Link
-                  to="/contact"
+                </a>
+                <a
+                  href="/contact"
                   className="text-lg font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Контакты
-                </Link>
+                </a>
               </div>
             </SheetContent>
           </Sheet>
