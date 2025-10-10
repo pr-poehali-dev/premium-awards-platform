@@ -16,18 +16,15 @@ export default function Hero() {
       <section className="relative min-h-screen flex items-center justify-start overflow-hidden">
         {/* Background Video */}
         <div className="absolute inset-0 z-0">
-          <iframe
-            src="https://play.boomstream.com/QDfhl14t?color=false&autoplay=1&controls=0&title=0&rewind=0&loop=1&muted=1"
-            allow="autoplay; fullscreen"
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vh] min-w-full min-h-full object-cover pointer-events-none"
-            style={{
-              border: 'none',
-              width: '100vw',
-              height: '56.25vw',
-              minHeight: '100vh',
-              minWidth: '177.77vh',
-            }}
-          />
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="YOUR_VIDEO_URL_HERE.mp4" type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
         </div>
         
