@@ -74,7 +74,6 @@ export default function Hero() {
 
               <div className="grid grid-cols-2 gap-4 pt-8">
                 {[
-                  { icon: 'Trophy', label: 'Индивидуальный дизайн', desc: 'Уникальные концепции' },
                   { icon: 'ShieldCheck', label: 'Безопасность и анонимность', desc: 'Конфиденциальность гарантирована' },
                   { icon: 'Gem', label: 'Ручная работа мастеров', desc: 'Только лимитированные тиражи изделий' },
                   { icon: 'Clock', label: 'От 5 дней', desc: 'Готовые решения под вашу задачу' },
