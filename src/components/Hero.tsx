@@ -28,6 +28,14 @@ export default function Hero() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Text Content */}
             <div className="space-y-8 animate-fade-in">
+              <div className="mb-6">
+                <img 
+                  src="https://cdn.poehali.dev/files/284bb123-10cd-4744-b0ab-be5704a2b201.png" 
+                  alt="ART STEKLOV" 
+                  className="h-24 md:h-32 w-auto"
+                />
+              </div>
+
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
                 <Icon name="Award" className="text-primary" size={18} />
                 <span className="text-sm subheading text-primary">Награды премиум-класса</span>
