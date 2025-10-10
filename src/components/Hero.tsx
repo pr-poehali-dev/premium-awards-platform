@@ -16,18 +16,15 @@ export default function Hero() {
       <section className="relative min-h-screen flex items-center justify-start overflow-hidden">
         {/* Background Video */}
         <div className="absolute inset-0 z-0">
-          <iframe
-            src="https://play.boomstream.com/QDfhl14t?color=false&autoplay=1&controls=0&title=0&rewind=0&loop=1&muted=1"
-            allow="autoplay; fullscreen"
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vh] min-w-full min-h-full object-cover pointer-events-none"
-            style={{
-              border: 'none',
-              width: '100vw',
-              height: '56.25vw',
-              minHeight: '100vh',
-              minWidth: '177.77vh',
-            }}
-          />
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="YOUR_VIDEO_URL_HERE.mp4" type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
         </div>
         
@@ -78,11 +75,9 @@ export default function Hero() {
               <div className="grid grid-cols-2 gap-4 pt-8">
                 {[
                   { icon: 'Trophy', label: 'Индивидуальный дизайн', desc: 'Уникальные концепции' },
-                  { icon: 'ShieldCheck', label: 'Безопасность и анонимность', desc: 'Конфиденциальность гарантирована' },
-                  { icon: 'Gem', label: 'Ручная работа мастеров', desc: 'Только лимитированные тиражи изделий' },
-                  { icon: 'Clock', label: 'От 5 дней', desc: 'Готовые решения под вашу задачу' },
-                  { icon: 'Shield', label: 'Полный цикл контроля', desc: 'От заявки до доставки до двери' },
-                  { icon: 'Truck', label: 'Доставка по всей России и СНГ', desc: 'Землей, водой и воздухом' },
+                  { icon: 'Gem', label: 'Лучшие материалы', desc: 'Золото, хрусталь, камень' },
+                  { icon: 'Clock', label: 'От 7 дней', desc: 'Срочное производство' },
+                  { icon: 'Shield', label: '100% гарантия', desc: 'Качество и сроки' },
                 ].map((feature, idx) => (
                   <div key={idx} className="flex items-start gap-3 p-4 rounded-lg bg-[#FAEEE1]/10 backdrop-blur-sm border border-[#FAEEE1]/20 hover:border-[#FAEEE1]/40 transition-all">
                     <div className="w-10 h-10 rounded-full bg-[#FAEEE1]/20 flex items-center justify-center flex-shrink-0">
