@@ -32,7 +32,7 @@ interface AwardVisualizerProps {
   };
 }
 
-export default function AwardVisualizer({ preselectedAward }: AwardVisualizerProps) {
+function AwardVisualizer({ preselectedAward }: AwardVisualizerProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const isStandalonePage = location.pathname === '/constructor';
@@ -454,3 +454,5 @@ photorealistic, 8k resolution, professional photography`;
     </section>
   );
 }
+
+export default AwardVisualizer;

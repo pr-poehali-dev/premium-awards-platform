@@ -15,7 +15,7 @@ const routeMap: Record<string, string> = {
   'about': 'О компании',
 };
 
-export default function Breadcrumbs() {
+function Breadcrumbs() {
   const location = useLocation();
   const pathnames = location.pathname.split('/').filter((x) => x);
 
@@ -61,3 +61,5 @@ export default function Breadcrumbs() {
     </nav>
   );
 }
+
+export default Breadcrumbs;
