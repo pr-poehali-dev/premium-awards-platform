@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -33,9 +32,7 @@ interface AwardVisualizerProps {
 }
 
 export default function AwardVisualizer({ preselectedAward }: AwardVisualizerProps) {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const isStandalonePage = location.pathname === '/constructor';
+  const isStandalonePage = typeof window !== 'undefined' && window.location.pathname === '/constructor';
   
   const [selectedAward, setSelectedAward] = useState<Award | null>(() => {
     if (preselectedAward) {
@@ -190,7 +187,7 @@ photorealistic, 8k resolution, professional photography`;
           {isStandalonePage && (
             <Button
               variant="ghost"
-              onClick={() => navigate('/catalog')}
+              onClick={() => window.location.href = '/catalog'}
               className="mb-6"
             >
               <Icon name="ArrowLeft" className="mr-2" size={18} />
