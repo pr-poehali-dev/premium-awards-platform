@@ -127,7 +127,7 @@ export default function Hero() {
         </div>
         
         <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl mt-20 md:mt-24">
             {/* Left Column - Text Content in Beige */}
             <div className="space-y-6 md:space-y-8 animate-fade-in pb-20 md:pb-0">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FAEEE1]/20 border border-[#FAEEE1]/30 backdrop-blur-sm">
