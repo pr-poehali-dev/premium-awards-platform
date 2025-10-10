@@ -12,19 +12,30 @@ export default function Hero() {
 
   return (
     <>
-      {/* Hero Section with Video Background */}
+      {/* Hero Section with Slideshow Background */}
       <section className="relative min-h-screen flex items-center justify-start overflow-hidden">
-        {/* Background Video */}
+        {/* Background Slideshow */}
         <div className="absolute inset-0 z-0">
-          <video 
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source src="YOUR_VIDEO_URL_HERE.mp4" type="video/mp4" />
-          </video>
+          <div className="slideshow-container w-full h-full">
+            {[
+              'https://cdn.poehali.dev/files/0927b776-464d-47c8-a300-0a7289fc0f77.jpg',
+              'https://cdn.poehali.dev/files/fe732047-cbac-471c-a126-c1e2b67aa34e.jpg',
+              'https://cdn.poehali.dev/files/bd743598-2856-404c-a117-5b45e4b09746.jpg',
+              'https://cdn.poehali.dev/files/65f8b763-6238-4587-a7ca-a8b5275d2bb3.jpg',
+            ].map((img, idx) => (
+              <div
+                key={idx}
+                className="slideshow-image absolute inset-0 w-full h-full opacity-0"
+                style={{
+                  backgroundImage: `url(${img})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  animation: `slideshow 20s infinite`,
+                  animationDelay: `${idx * 5}s`,
+                }}
+              />
+            ))}
+          </div>
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
         </div>
         
