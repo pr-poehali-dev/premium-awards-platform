@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import AlternativeHeader from '@/components/AlternativeHeader';
@@ -124,31 +124,38 @@ export default function AlternativeHome() {
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [cardOffset, setCardOffset] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [expandingCard, setExpandingCard] = useState<number | null>(null);
+  const [expandingCardIndex, setExpandingCardIndex] = useState<number | null>(null);
+  const expandingCardRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (isAnimating) return;
+    
     const progressInterval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
-          handleNext();
-          return 0;
+          return 100;
         }
-        return prev + 2;
+        return prev + 0.4;
       });
-    }, 100);
+    }, 20);
 
     return () => clearInterval(progressInterval);
-  }, [activeIndex]);
+  }, [activeIndex, isAnimating]);
+
+  useEffect(() => {
+    if (progress >= 100 && !isAnimating) {
+      handleNext();
+    }
+  }, [progress, isAnimating]);
 
   const handleNext = () => {
     if (isAnimating) return;
     setIsAnimating(true);
     setIsFadingOut(true);
-    setProgress(0);
     
     const nextIndex = (activeIndex + 1) % destinations.length;
-    setExpandingCard(nextIndex);
+    setExpandingCardIndex(nextIndex);
     
     setTimeout(() => {
       setCardOffset(prev => {
@@ -159,22 +166,22 @@ export default function AlternativeHome() {
       
       setActiveIndex(nextIndex);
       setIsFadingOut(false);
+      setProgress(0);
       
       setTimeout(() => {
-        setExpandingCard(null);
+        setExpandingCardIndex(null);
         setIsAnimating(false);
-      }, 800);
-    }, 600);
+      }, 1000);
+    }, 800);
   };
 
   const handlePrev = () => {
     if (isAnimating) return;
     setIsAnimating(true);
     setIsFadingOut(true);
-    setProgress(0);
     
     const prevIndex = (activeIndex - 1 + destinations.length) % destinations.length;
-    setExpandingCard(prevIndex);
+    setExpandingCardIndex(prevIndex);
     
     setTimeout(() => {
       setCardOffset(prev => {
@@ -185,12 +192,13 @@ export default function AlternativeHome() {
       
       setActiveIndex(prevIndex);
       setIsFadingOut(false);
+      setProgress(0);
       
       setTimeout(() => {
-        setExpandingCard(null);
+        setExpandingCardIndex(null);
         setIsAnimating(false);
-      }, 800);
-    }, 600);
+      }, 1000);
+    }, 800);
   };
 
   const handleCardClick = (index: number) => {
@@ -200,18 +208,18 @@ export default function AlternativeHome() {
       if (isAnimating) return;
       setIsAnimating(true);
       setIsFadingOut(true);
-      setProgress(0);
-      setExpandingCard(index);
+      setExpandingCardIndex(index);
       
       setTimeout(() => {
         setActiveIndex(index);
         setIsFadingOut(false);
+        setProgress(0);
         
         setTimeout(() => {
-          setExpandingCard(null);
+          setExpandingCardIndex(null);
           setIsAnimating(false);
-        }, 800);
-      }, 600);
+        }, 1000);
+      }, 800);
     }
   };
 
@@ -233,15 +241,26 @@ export default function AlternativeHome() {
           }}
         />
 
-        {expandingCard !== null && (
+        {expandingCardIndex !== null && (
           <div
-            className="absolute inset-0 bg-cover bg-center z-[5] animate-expand-card"
+            ref={expandingCardRef}
+            className="fixed z-[50] rounded-2xl overflow-hidden"
             style={{
-              backgroundImage: `url(${destinations[expandingCard].image})`,
-              filter: 'brightness(0.6)',
-              transformOrigin: 'right bottom'
+              bottom: '112px',
+              right: expandingCardIndex === activeIndex ? '64px' : `${64 + ((expandingCardIndex - cardOffset) * (192 + 24))}px`,
+              width: expandingCardIndex === activeIndex ? '224px' : '192px',
+              height: expandingCardIndex === activeIndex ? '340px' : '280px',
+              animation: 'expandCard 1s cubic-bezier(0.4, 0, 0.2, 1) forwards'
             }}
-          />
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${destinations[expandingCardIndex].image})`,
+                filter: 'brightness(0.6)'
+              }}
+            />
+          </div>
         )}
 
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent z-[6]" />
@@ -314,7 +333,7 @@ export default function AlternativeHome() {
                 {visibleCards.map((dest, idx) => {
                   const globalIndex = cardOffset + idx;
                   const isActive = globalIndex === activeIndex;
-                  const isExpanding = globalIndex === expandingCard;
+                  const isExpanding = globalIndex === expandingCardIndex;
 
                   return (
                     <div
@@ -323,7 +342,7 @@ export default function AlternativeHome() {
                       className={`
                         relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-700 ease-out
                         ${isActive ? 'w-56 h-[340px] shadow-2xl' : 'w-48 h-[280px] opacity-85 hover:opacity-100'}
-                        ${isExpanding ? 'z-20' : 'z-10'}
+                        ${isExpanding ? 'opacity-0' : 'opacity-100'}
                       `}
                       style={{
                         animation: isExpanding ? 'none' : `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.15}s both`
@@ -379,9 +398,10 @@ export default function AlternativeHome() {
                       className="relative w-16 h-1 bg-white/20 rounded-full overflow-hidden"
                     >
                       <div
-                        className="absolute inset-0 bg-white rounded-full transition-all duration-100"
+                        className="absolute inset-0 bg-white rounded-full transition-all ease-linear"
                         style={{
-                          width: index === activeIndex ? `${progress}%` : index < activeIndex ? '100%' : '0%'
+                          width: index === activeIndex ? `${progress}%` : index < activeIndex ? '100%' : '0%',
+                          transitionDuration: '20ms'
                         }}
                       />
                     </div>
@@ -411,9 +431,10 @@ export default function AlternativeHome() {
                   style={{ width: index === activeIndex ? '40px' : '24px' }}
                 >
                   <div
-                    className="absolute inset-0 bg-white rounded-full transition-all duration-100"
+                    className="absolute inset-0 bg-white rounded-full transition-all ease-linear"
                     style={{
-                      width: index === activeIndex ? `${progress}%` : index < activeIndex ? '100%' : '0%'
+                      width: index === activeIndex ? `${progress}%` : index < activeIndex ? '100%' : '0%',
+                      transitionDuration: '20ms'
                     }}
                   />
                 </div>
@@ -450,23 +471,18 @@ export default function AlternativeHome() {
             }
           }
 
-          @keyframes expand-card {
+          @keyframes expandCard {
             0% {
-              clip-path: inset(60% 0% 0% 60%);
-              opacity: 0;
-            }
-            50% {
-              clip-path: inset(30% 0% 0% 30%);
-              opacity: 0.5;
+              transform: scale(1);
             }
             100% {
-              clip-path: inset(0% 0% 0% 0%);
-              opacity: 1;
+              width: 100vw !important;
+              height: 100vh !important;
+              bottom: 0 !important;
+              right: 0 !important;
+              border-radius: 0 !important;
+              transform: scale(1);
             }
-          }
-
-          .animate-expand-card {
-            animation: expand-card 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
           }
         `}</style>
       </div>
