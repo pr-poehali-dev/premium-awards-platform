@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import AlternativeHome from "./pages/AlternativeHome";
 import CatalogPage from "./pages/CatalogPage";
 import PortfolioPage from "./pages/PortfolioPage";
 import ConstructorPage from "./pages/ConstructorPage";
@@ -22,18 +23,17 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Header />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/catalog" element={<CatalogPage />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/constructor" element={<ConstructorPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/about" element={<AboutPage />} />
+          <Route path="/alt" element={<AlternativeHome />} />
+          <Route path="/catalog" element={<><Header /><CatalogPage /><Footer /></>} />
+          <Route path="/portfolio" element={<><Header /><PortfolioPage /><Footer /></>} />
+          <Route path="/constructor" element={<><Header /><ConstructorPage /><Footer /></>} />
+          <Route path="/contact" element={<><Header /><ContactPage /><Footer /></>} />
+          <Route path="/about" element={<><Header /><AboutPage /><Footer /></>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<><Header /><NotFound /><Footer /></>} />
         </Routes>
-        <Footer />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
