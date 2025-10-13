@@ -123,20 +123,32 @@ export default function AlternativeHome() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [cardOffset, setCardOffset] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [expandingCard, setExpandingCard] = useState<number | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext();
-    }, 5000);
+    const progressInterval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) {
+          handleNext();
+          return 0;
+        }
+        return prev + 2;
+      });
+    }, 100);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(progressInterval);
   }, [activeIndex]);
 
   const handleNext = () => {
     if (isAnimating) return;
     setIsAnimating(true);
     setIsFadingOut(true);
+    setProgress(0);
+    
+    const nextIndex = (activeIndex + 1) % destinations.length;
+    setExpandingCard(nextIndex);
     
     setTimeout(() => {
       setCardOffset(prev => {
@@ -145,19 +157,24 @@ export default function AlternativeHome() {
         return newOffset;
       });
       
-      setActiveIndex((prev) => (prev + 1) % destinations.length);
+      setActiveIndex(nextIndex);
       setIsFadingOut(false);
       
       setTimeout(() => {
+        setExpandingCard(null);
         setIsAnimating(false);
-      }, 100);
-    }, 400);
+      }, 800);
+    }, 600);
   };
 
   const handlePrev = () => {
     if (isAnimating) return;
     setIsAnimating(true);
     setIsFadingOut(true);
+    setProgress(0);
+    
+    const prevIndex = (activeIndex - 1 + destinations.length) % destinations.length;
+    setExpandingCard(prevIndex);
     
     setTimeout(() => {
       setCardOffset(prev => {
@@ -166,13 +183,14 @@ export default function AlternativeHome() {
         return newOffset;
       });
       
-      setActiveIndex((prev) => (prev - 1 + destinations.length) % destinations.length);
+      setActiveIndex(prevIndex);
       setIsFadingOut(false);
       
       setTimeout(() => {
+        setExpandingCard(null);
         setIsAnimating(false);
-      }, 100);
-    }, 400);
+      }, 800);
+    }, 600);
   };
 
   const handleCardClick = (index: number) => {
@@ -182,15 +200,18 @@ export default function AlternativeHome() {
       if (isAnimating) return;
       setIsAnimating(true);
       setIsFadingOut(true);
+      setProgress(0);
+      setExpandingCard(index);
       
       setTimeout(() => {
         setActiveIndex(index);
         setIsFadingOut(false);
         
         setTimeout(() => {
+          setExpandingCard(null);
           setIsAnimating(false);
-        }, 100);
-      }, 400);
+        }, 800);
+      }, 600);
     }
   };
 
@@ -212,7 +233,18 @@ export default function AlternativeHome() {
           }}
         />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
+        {expandingCard !== null && (
+          <div
+            className="absolute inset-0 bg-cover bg-center z-[5] animate-expand-card"
+            style={{
+              backgroundImage: `url(${destinations[expandingCard].image})`,
+              filter: 'brightness(0.6)',
+              transformOrigin: 'right bottom'
+            }}
+          />
+        )}
+
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent z-[6]" />
 
         <div className="relative z-10 h-full flex flex-col justify-between">
           <div className="flex-1 flex items-center">
@@ -222,7 +254,7 @@ export default function AlternativeHome() {
               }`}>
                 <div className="overflow-hidden mb-6">
                   <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2.5">
-                    <Icon name="Sparkles" size={16} className="text-primary" />
+                    <Icon name="Sparkles" size={16} className="text-white" />
                     <span className="text-sm font-medium text-white">{active.badge}</span>
                   </div>
                 </div>
@@ -247,8 +279,8 @@ export default function AlternativeHome() {
 
                 <div className="overflow-hidden mb-8">
                   <div className="flex items-start gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 max-w-md">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                      <Icon name={active.advantage.icon as any} size={24} className="text-primary" />
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                      <Icon name={active.advantage.icon as any} size={24} className="text-white" />
                     </div>
                     <div>
                       <h3 className="text-white font-semibold text-sm mb-1">{active.advantage.title}</h3>
@@ -282,6 +314,7 @@ export default function AlternativeHome() {
                 {visibleCards.map((dest, idx) => {
                   const globalIndex = cardOffset + idx;
                   const isActive = globalIndex === activeIndex;
+                  const isExpanding = globalIndex === expandingCard;
 
                   return (
                     <div
@@ -290,9 +323,10 @@ export default function AlternativeHome() {
                       className={`
                         relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-700 ease-out
                         ${isActive ? 'w-56 h-[340px] shadow-2xl' : 'w-48 h-[280px] opacity-85 hover:opacity-100'}
+                        ${isExpanding ? 'z-20' : 'z-10'}
                       `}
                       style={{
-                        animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.15}s both`
+                        animation: isExpanding ? 'none' : `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.15}s both`
                       }}
                     >
                       <div
@@ -322,7 +356,7 @@ export default function AlternativeHome() {
                 })}
               </div>
 
-              <div className="flex items-center justify-end gap-4">
+              <div className="flex items-center justify-end gap-6">
                 <button
                   onClick={handlePrev}
                   disabled={isAnimating}
@@ -337,6 +371,22 @@ export default function AlternativeHome() {
                 >
                   <Icon name="ChevronRight" size={20} className="text-white group-hover:scale-110 transition-transform" />
                 </button>
+
+                <div className="flex gap-2 ml-2">
+                  {destinations.map((_, index) => (
+                    <div
+                      key={index}
+                      className="relative w-16 h-1 bg-white/20 rounded-full overflow-hidden"
+                    >
+                      <div
+                        className="absolute inset-0 bg-white rounded-full transition-all duration-100"
+                        style={{
+                          width: index === activeIndex ? `${progress}%` : index < activeIndex ? '100%' : '0%'
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -355,13 +405,18 @@ export default function AlternativeHome() {
           <div className="lg:hidden absolute bottom-20 left-0 right-0 px-8">
             <div className="flex gap-2 justify-center mb-6">
               {destinations.map((_, index) => (
-                <button
+                <div
                   key={index}
-                  onClick={() => handleCardClick(index)}
-                  className={`h-1 rounded-full transition-all ${
-                    index === activeIndex ? 'w-10 bg-white' : 'w-6 bg-white/40'
-                  }`}
-                />
+                  className="relative h-1 rounded-full overflow-hidden bg-white/20"
+                  style={{ width: index === activeIndex ? '40px' : '24px' }}
+                >
+                  <div
+                    className="absolute inset-0 bg-white rounded-full transition-all duration-100"
+                    style={{
+                      width: index === activeIndex ? `${progress}%` : index < activeIndex ? '100%' : '0%'
+                    }}
+                  />
+                </div>
               ))}
             </div>
             <div className="flex items-center justify-center gap-4">
@@ -393,6 +448,25 @@ export default function AlternativeHome() {
               opacity: 1;
               transform: translateX(0) scale(1);
             }
+          }
+
+          @keyframes expand-card {
+            0% {
+              clip-path: inset(60% 0% 0% 60%);
+              opacity: 0;
+            }
+            50% {
+              clip-path: inset(30% 0% 0% 30%);
+              opacity: 0.5;
+            }
+            100% {
+              clip-path: inset(0% 0% 0% 0%);
+              opacity: 1;
+            }
+          }
+
+          .animate-expand-card {
+            animation: expand-card 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
           }
         `}</style>
       </div>
