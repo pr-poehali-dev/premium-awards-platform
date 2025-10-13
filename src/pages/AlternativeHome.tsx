@@ -202,10 +202,10 @@ export default function AlternativeHome() {
                 <div className="overflow-hidden mb-6">
                   <div
                     key={`badge-${activeIndex}`}
-                    className="inline-flex items-center gap-2 bg-white/95 backdrop-blur-md rounded-full px-4 py-2.5 shadow-lg animate-in slide-in-from-left duration-700"
+                    className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2.5 animate-in slide-in-from-left duration-700"
                   >
                     <Icon name="Sparkles" size={16} className="text-primary" />
-                    <span className="text-sm font-semibold text-gray-900">{active.badge}</span>
+                    <span className="text-sm font-medium text-white">{active.badge}</span>
                   </div>
                 </div>
 
@@ -239,14 +239,14 @@ export default function AlternativeHome() {
                 <div className="overflow-hidden mb-8">
                   <div
                     key={`advantage-${activeIndex}`}
-                    className="flex items-start gap-4 bg-white/95 backdrop-blur-md rounded-2xl p-5 max-w-md shadow-lg animate-in slide-in-from-left duration-700 delay-400"
+                    className="flex items-start gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 max-w-md animate-in slide-in-from-left duration-700 delay-400"
                   >
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
                       <Icon name={active.advantage.icon as any} size={24} className="text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-gray-900 font-semibold text-sm mb-1">{active.advantage.title}</h3>
-                      <p className="text-gray-600 text-xs leading-relaxed">{active.advantage.description}</p>
+                      <h3 className="text-white font-semibold text-sm mb-1">{active.advantage.title}</h3>
+                      <p className="text-white/70 text-xs leading-relaxed">{active.advantage.description}</p>
                     </div>
                   </div>
                 </div>
@@ -270,9 +270,9 @@ export default function AlternativeHome() {
             </div>
           </div>
 
-          <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 xl:left-auto xl:translate-x-0 xl:right-32 bottom-28">
+          <div className="hidden lg:block absolute right-16 xl:right-32 bottom-28">
             <div className="flex flex-col gap-6">
-              <div className="flex gap-5">
+              <div className="flex gap-6">
                 {visibleCards.map((dest, idx) => {
                   const globalIndex = cardOffset + idx;
                   const isActive = globalIndex === activeIndex;
@@ -283,7 +283,7 @@ export default function AlternativeHome() {
                       onClick={() => handleCardClick(globalIndex)}
                       className={`
                         relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-700 ease-out
-                        ${isActive ? 'w-64 h-80 shadow-2xl scale-105' : 'w-56 h-72 opacity-80 hover:opacity-100 hover:scale-105'}
+                        ${isActive ? 'w-56 h-[340px] shadow-2xl' : 'w-48 h-[280px] opacity-85 hover:opacity-100'}
                       `}
                       style={{
                         animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.15}s both`
