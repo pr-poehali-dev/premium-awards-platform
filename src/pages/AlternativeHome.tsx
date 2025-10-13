@@ -121,6 +121,7 @@ const destinations = [
 export default function AlternativeHome() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isFadingOut, setIsFadingOut] = useState(false);
   const [cardOffset, setCardOffset] = useState(0);
   const navigate = useNavigate();
 
@@ -135,33 +136,43 @@ export default function AlternativeHome() {
   const handleNext = () => {
     if (isAnimating) return;
     setIsAnimating(true);
-    
-    setCardOffset(prev => {
-      const newOffset = prev + 1;
-      if (newOffset > destinations.length - 4) return 0;
-      return newOffset;
-    });
+    setIsFadingOut(true);
     
     setTimeout(() => {
+      setCardOffset(prev => {
+        const newOffset = prev + 1;
+        if (newOffset > destinations.length - 4) return 0;
+        return newOffset;
+      });
+      
       setActiveIndex((prev) => (prev + 1) % destinations.length);
-      setIsAnimating(false);
-    }, 800);
+      setIsFadingOut(false);
+      
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 100);
+    }, 400);
   };
 
   const handlePrev = () => {
     if (isAnimating) return;
     setIsAnimating(true);
-    
-    setCardOffset(prev => {
-      const newOffset = prev - 1;
-      if (newOffset < 0) return destinations.length - 4;
-      return newOffset;
-    });
+    setIsFadingOut(true);
     
     setTimeout(() => {
+      setCardOffset(prev => {
+        const newOffset = prev - 1;
+        if (newOffset < 0) return destinations.length - 4;
+        return newOffset;
+      });
+      
       setActiveIndex((prev) => (prev - 1 + destinations.length) % destinations.length);
-      setIsAnimating(false);
-    }, 800);
+      setIsFadingOut(false);
+      
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 100);
+    }, 400);
   };
 
   const handleCardClick = (index: number) => {
@@ -170,10 +181,16 @@ export default function AlternativeHome() {
     } else {
       if (isAnimating) return;
       setIsAnimating(true);
+      setIsFadingOut(true);
+      
       setTimeout(() => {
         setActiveIndex(index);
-        setIsAnimating(false);
-      }, 800);
+        setIsFadingOut(false);
+        
+        setTimeout(() => {
+          setIsAnimating(false);
+        }, 100);
+      }, 400);
     }
   };
 
@@ -186,7 +203,9 @@ export default function AlternativeHome() {
       <div className="relative w-full h-screen overflow-hidden bg-black">
         <div
           key={`bg-${activeIndex}`}
-          className="absolute inset-0 bg-cover bg-center animate-in fade-in zoom-in-95 duration-1000"
+          className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ${
+            isFadingOut ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
+          }`}
           style={{
             backgroundImage: `url(${active.image})`,
             filter: 'brightness(0.6)'
@@ -198,49 +217,36 @@ export default function AlternativeHome() {
         <div className="relative z-10 h-full flex flex-col justify-between">
           <div className="flex-1 flex items-center">
             <div className="container mx-auto px-8 md:px-16 py-20">
-              <div className="max-w-xl">
+              <div className={`max-w-xl transition-all duration-400 ${
+                isFadingOut ? 'opacity-0 translate-x-[-20px]' : 'opacity-100 translate-x-0'
+              }`}>
                 <div className="overflow-hidden mb-6">
-                  <div
-                    key={`badge-${activeIndex}`}
-                    className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2.5 animate-in slide-in-from-left duration-700"
-                  >
+                  <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2.5">
                     <Icon name="Sparkles" size={16} className="text-primary" />
                     <span className="text-sm font-medium text-white">{active.badge}</span>
                   </div>
                 </div>
 
                 <div className="overflow-hidden">
-                  <p
-                    key={`subtitle-${activeIndex}`}
-                    className="text-[#FAEEE1]/80 text-xs md:text-sm mb-3 uppercase tracking-widest animate-in slide-in-from-left duration-700 delay-100"
-                  >
+                  <p className="text-[#FAEEE1]/80 text-xs md:text-sm mb-3 uppercase tracking-widest">
                     {active.subtitle}
                   </p>
                 </div>
 
                 <div className="overflow-hidden mb-4">
-                  <h1
-                    key={`title-${activeIndex}`}
-                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 animate-in slide-in-from-left duration-700 delay-200"
-                  >
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
                     {active.title}
                   </h1>
                 </div>
 
                 <div className="overflow-hidden mb-8">
-                  <p
-                    key={`desc-${activeIndex}`}
-                    className="text-white/90 text-sm md:text-base max-w-md animate-in slide-in-from-left duration-700 delay-300"
-                  >
+                  <p className="text-white/90 text-sm md:text-base max-w-md">
                     {active.description}
                   </p>
                 </div>
 
                 <div className="overflow-hidden mb-8">
-                  <div
-                    key={`advantage-${activeIndex}`}
-                    className="flex items-start gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 max-w-md animate-in slide-in-from-left duration-700 delay-400"
-                  >
+                  <div className="flex items-start gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 max-w-md">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
                       <Icon name={active.advantage.icon as any} size={24} className="text-primary" />
                     </div>
@@ -251,7 +257,7 @@ export default function AlternativeHome() {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-4 animate-in slide-in-from-left duration-700 delay-500">
+                <div className="flex flex-wrap gap-4">
                   <button
                     onClick={() => navigate(active.link)}
                     className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-full font-semibold transition-all flex items-center gap-2 group"
