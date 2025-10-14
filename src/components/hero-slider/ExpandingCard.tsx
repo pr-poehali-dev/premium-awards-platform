@@ -51,7 +51,7 @@ export default function ExpandingCard({
       `}</style>
       <div
         ref={expandingCardRef}
-        className="absolute overflow-hidden z-[2]"
+        className="absolute overflow-hidden z-[5]"
         style={{
           bottom: '176px',
           right: `${calculatedRight}px`,

@@ -181,12 +181,16 @@ const Index = () => {
           />
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent z-[6]" />
+        <div className={`absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent ${
+          expandingCardIndex !== null ? 'z-[10]' : 'z-[3]'
+        }`} />
 
-        <div className="relative z-10 h-full flex flex-col justify-between">
+        <div className="relative z-[15] h-full flex flex-col justify-between">
           <SlideContent active={active} isFadingOut={isFadingOut} />
 
-          <div className="hidden lg:block absolute right-16 xl:right-32 bottom-44">
+          <div className={`hidden lg:block absolute right-16 xl:right-32 bottom-44 transition-opacity duration-300 ${
+            expandingCardIndex !== null ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}>
             <CardCarousel
               visibleCards={nextCards}
               cardOffset={0}
