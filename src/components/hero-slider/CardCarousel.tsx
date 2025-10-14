@@ -22,7 +22,7 @@ export default function CardCarousel({
           <div
             key={`${dest.id}-${idx}`}
             onClick={() => onCardClick(idx)}
-            className={`${isExpanding ? 'fixed z-[5]' : 'relative'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] opacity-90 hover:opacity-100 hover:scale-105 transition-transform duration-300`}
+            className={`${isExpanding ? 'fixed z-[5]' : 'relative'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] hover:scale-105 transition-transform duration-300`}
             style={
               isExpanding
                 ? {
@@ -40,20 +40,14 @@ export default function CardCarousel({
               className="absolute inset-0 bg-cover bg-center"
               style={{
                 backgroundImage: `url(${dest.image})`,
-                transform: 'scale(1.1)',
-                filter: 'brightness(0.9)',
+                transform: 'scale(1.05)',
+                filter: 'brightness(1)',
                 animation: isExpanding ? 'expandCardImage 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards' : 'none'
               }}
             />
-            <div 
-              className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"
-              style={isExpanding ? { animation: 'fadeOutGradient 0.6s ease-out forwards' } : {}}
-            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
-            <div 
-              className="absolute bottom-0 left-0 right-0 p-4 text-white"
-              style={isExpanding ? { animation: 'fadeOutGradient 0.4s ease-out forwards' } : {}}
-            >
+            <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
               <p className="text-xs uppercase tracking-wider mb-1 opacity-80">{dest.subtitle}</p>
               <h3 className="font-bold leading-tight text-xs">
                 {dest.title}

@@ -195,8 +195,8 @@
 
   @keyframes expandCardImage {
     0% {
-      transform: scale(1.1);
-      filter: brightness(0.9);
+      transform: scale(1.05);
+      filter: brightness(1);
     }
     100% {
       transform: scale(1);
