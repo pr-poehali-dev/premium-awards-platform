@@ -152,10 +152,13 @@ const Index = () => {
   const handleNext = () => {
     if (isAnimating) return;
     setIsAnimating(true);
-    setIsFadingOut(true);
     
     const nextIndex = (activeIndex + 1) % destinations.length;
     setExpandingCardIndex(nextIndex);
+    
+    setTimeout(() => {
+      setIsFadingOut(true);
+    }, 50);
     
     setTimeout(() => {
       setCardOffset(prev => {
@@ -165,23 +168,29 @@ const Index = () => {
       });
       
       setActiveIndex(nextIndex);
-      setIsFadingOut(false);
       setProgress(0);
-      
-      setTimeout(() => {
-        setExpandingCardIndex(null);
-        setIsAnimating(false);
-      }, 1000);
-    }, 800);
+    }, 400);
+    
+    setTimeout(() => {
+      setIsFadingOut(false);
+    }, 500);
+    
+    setTimeout(() => {
+      setExpandingCardIndex(null);
+      setIsAnimating(false);
+    }, 900);
   };
 
   const handlePrev = () => {
     if (isAnimating) return;
     setIsAnimating(true);
-    setIsFadingOut(true);
     
     const prevIndex = (activeIndex - 1 + destinations.length) % destinations.length;
     setExpandingCardIndex(prevIndex);
+    
+    setTimeout(() => {
+      setIsFadingOut(true);
+    }, 50);
     
     setTimeout(() => {
       setCardOffset(prev => {
@@ -191,14 +200,17 @@ const Index = () => {
       });
       
       setActiveIndex(prevIndex);
-      setIsFadingOut(false);
       setProgress(0);
-      
-      setTimeout(() => {
-        setExpandingCardIndex(null);
-        setIsAnimating(false);
-      }, 1000);
-    }, 800);
+    }, 400);
+    
+    setTimeout(() => {
+      setIsFadingOut(false);
+    }, 500);
+    
+    setTimeout(() => {
+      setExpandingCardIndex(null);
+      setIsAnimating(false);
+    }, 900);
   };
 
   const handleCardClick = (index: number) => {
@@ -207,19 +219,25 @@ const Index = () => {
     } else {
       if (isAnimating) return;
       setIsAnimating(true);
-      setIsFadingOut(true);
       setExpandingCardIndex(index);
       
       setTimeout(() => {
+        setIsFadingOut(true);
+      }, 50);
+      
+      setTimeout(() => {
         setActiveIndex(index);
-        setIsFadingOut(false);
         setProgress(0);
-        
-        setTimeout(() => {
-          setExpandingCardIndex(null);
-          setIsAnimating(false);
-        }, 1000);
-      }, 800);
+      }, 400);
+      
+      setTimeout(() => {
+        setIsFadingOut(false);
+      }, 500);
+      
+      setTimeout(() => {
+        setExpandingCardIndex(null);
+        setIsAnimating(false);
+      }, 900);
     }
   };
 
@@ -232,8 +250,8 @@ const Index = () => {
       <div className="relative w-full h-screen overflow-hidden bg-black">
         <div
           key={`bg-${activeIndex}`}
-          className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ${
-            isFadingOut ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
+          className={`absolute inset-0 bg-cover bg-center transition-all duration-700 ${
+            isFadingOut ? 'opacity-0 scale-105' : 'opacity-100 scale-100 delay-200'
           }`}
           style={{
             backgroundImage: `url(${active.image})`,
@@ -281,8 +299,8 @@ const Index = () => {
         <div className="relative z-10 h-full flex flex-col justify-between">
           <div className="flex-1 flex items-center">
             <div className="container mx-auto px-8 md:px-16 py-20">
-              <div className={`max-w-xl transition-all duration-400 ${
-                isFadingOut ? 'opacity-0 translate-x-[-20px]' : 'opacity-100 translate-x-0'
+              <div className={`max-w-xl transition-all duration-500 ${
+                isFadingOut ? 'opacity-0 translate-x-[-20px]' : 'opacity-100 translate-x-0 delay-300'
               }`}>
                 <div className="overflow-hidden mb-6">
                   <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2.5">
@@ -348,6 +366,10 @@ const Index = () => {
                   const isActive = globalIndex === activeIndex;
                   const isExpanding = globalIndex === expandingCardIndex;
 
+                  if (isActive && !isExpanding) {
+                    return null;
+                  }
+
                   return (
                     <div
                       key={`${dest.id}-${cardOffset}`}
@@ -355,7 +377,7 @@ const Index = () => {
                       className={`
                         relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-700 ease-out
                         ${isActive ? 'w-56 h-[340px] shadow-2xl' : 'w-48 h-[280px] opacity-85 hover:opacity-100'}
-                        ${isExpanding ? 'opacity-0' : 'opacity-100'}
+                        ${isExpanding ? 'opacity-0 pointer-events-none' : 'opacity-100'}
                       `}
                       style={{
                         animation: isExpanding ? 'none' : `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.15}s both`
