@@ -132,7 +132,10 @@ const Index = () => {
   };
 
   const active = destinations[activeIndex];
-  const visibleCards = destinations.slice(cardOffset, cardOffset + 4);
+  const nextCards = [];
+  for (let i = 1; i <= 4; i++) {
+    nextCards.push(destinations[(activeIndex + i) % destinations.length]);
+  }
 
   return (
     <>
@@ -140,8 +143,8 @@ const Index = () => {
       <div className="relative w-full h-screen overflow-hidden bg-black">
         <div
           key={`bg-${activeIndex}`}
-          className={`absolute inset-0 bg-cover bg-center transition-all duration-700 ${
-            isFadingOut ? 'opacity-0 scale-105' : 'opacity-100 scale-100 delay-200'
+          className={`absolute inset-0 bg-cover bg-center transition-all duration-700 z-[1] ${
+            isFadingOut ? 'opacity-0 scale-105' : 'opacity-100 scale-100 delay-100'
           }`}
           style={{
             backgroundImage: `url(${active.image})`,
@@ -152,7 +155,6 @@ const Index = () => {
         {expandingCardIndex !== null && (
           <ExpandingCard
             expandingCardIndex={expandingCardIndex}
-            cardOffset={cardOffset}
             activeIndex={activeIndex}
             destinations={destinations}
             expandingCardRef={expandingCardRef}
@@ -167,11 +169,14 @@ const Index = () => {
           <div className="hidden lg:block absolute right-16 xl:right-32 bottom-28">
             <div className="flex flex-col gap-6">
               <CardCarousel
-                visibleCards={visibleCards}
-                cardOffset={cardOffset}
-                activeIndex={activeIndex}
+                visibleCards={nextCards}
+                cardOffset={0}
+                activeIndex={-1}
                 expandingCardIndex={expandingCardIndex}
-                onCardClick={handleCardClick}
+                onCardClick={(idx) => {
+                  const targetIndex = (activeIndex + idx + 1) % destinations.length;
+                  handleCardClick(targetIndex);
+                }}
               />
 
               <NavigationControls
