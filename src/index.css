@@ -226,6 +226,21 @@
       transform: translateX(0) scale(1);
     }
   }
+
+  @keyframes expandToFullscreen {
+    0% {
+      width: 192px;
+      height: 280px;
+      border-radius: 16px;
+    }
+    100% {
+      width: 100vw;
+      height: 100vh;
+      bottom: 0 !important;
+      right: 0 !important;
+      border-radius: 0;
+    }
+  }
 }
 
 @layer components {

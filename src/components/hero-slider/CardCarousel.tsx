@@ -1,4 +1,4 @@
-import { Destination, destinations } from './destinations-data';
+import { Destination } from './destinations-data';
 
 interface CardCarouselProps {
   visibleCards: Destination[];
@@ -22,11 +22,20 @@ export default function CardCarousel({
           <div
             key={`${dest.id}-${idx}`}
             onClick={() => onCardClick(idx)}
-            className="relative rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] opacity-90 hover:opacity-100 hover:scale-105 transition-transform duration-300"
-            style={{
-              visibility: isExpanding ? 'hidden' : 'visible',
-              animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.1}s both`
-            }}
+            className={`relative rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] opacity-90 hover:opacity-100 hover:scale-105 transition-transform duration-300 ${
+              isExpanding ? 'fixed z-[5] animate-expand-to-fullscreen' : ''
+            }`}
+            style={
+              isExpanding
+                ? {
+                    animation: 'expandToFullscreen 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+                    bottom: '256px',
+                    right: `${64 + (visibleCards.length - 1 - idx) * (192 + 24)}px`
+                  }
+                : {
+                    animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.1}s both`
+                  }
+            }
           >
             <div
               className="absolute inset-0 bg-cover bg-center transition-all duration-700"
@@ -36,9 +45,15 @@ export default function CardCarousel({
                 filter: 'brightness(0.9)'
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+            <div 
+              className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"
+              style={isExpanding ? { animation: 'fadeOutGradient 0.6s ease-out forwards' } : {}}
+            />
 
-            <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+            <div 
+              className="absolute bottom-0 left-0 right-0 p-4 text-white"
+              style={isExpanding ? { animation: 'fadeOutGradient 0.4s ease-out forwards' } : {}}
+            >
               <p className="text-xs uppercase tracking-wider mb-1 opacity-80">{dest.subtitle}</p>
               <h3 className="font-bold leading-tight text-xs">
                 {dest.title}

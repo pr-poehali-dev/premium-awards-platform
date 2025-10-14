@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AlternativeHeader from '@/components/AlternativeHeader';
 import SlideContent from '@/components/hero-slider/SlideContent';
 import CardCarousel from '@/components/hero-slider/CardCarousel';
 import NavigationControls from '@/components/hero-slider/NavigationControls';
-import ExpandingCard from '@/components/hero-slider/ExpandingCard';
+
 import SliderStyles from '@/components/hero-slider/SliderStyles';
 import { destinations } from '@/components/hero-slider/destinations-data';
 
@@ -14,7 +14,6 @@ const Index = () => {
   const [cardOffset, setCardOffset] = useState(0);
   const [progress, setProgress] = useState(0);
   const [expandingCardIndex, setExpandingCardIndex] = useState<number | null>(null);
-  const expandingCardRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -146,19 +145,7 @@ const Index = () => {
           }}
         />
 
-        {expandingCardIndex !== null && (
-          <ExpandingCard
-            expandingCardIndex={expandingCardIndex}
-            activeIndex={activeIndex}
-            destinations={destinations}
-            expandingCardRef={expandingCardRef}
-            visibleCardsCount={visibleCardsCount}
-          />
-        )}
-
-        <div className={`absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent ${
-          expandingCardIndex !== null ? 'z-[10]' : 'z-[6]'
-        }`} />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent z-[6]" />
 
         <div className="relative z-[15] h-full flex flex-col">
           <SlideContent active={active} />
