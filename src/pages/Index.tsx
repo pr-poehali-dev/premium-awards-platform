@@ -166,28 +166,28 @@ const Index = () => {
         <div className="relative z-10 h-full flex flex-col justify-between">
           <SlideContent active={active} isFadingOut={isFadingOut} />
 
-          <div className="hidden lg:block absolute right-16 xl:right-32 bottom-28">
-            <div className="flex flex-col gap-6">
-              <CardCarousel
-                visibleCards={nextCards}
-                cardOffset={0}
-                activeIndex={-1}
-                expandingCardIndex={expandingCardIndex}
-                onCardClick={(idx) => {
-                  const targetIndex = (activeIndex + idx + 1) % destinations.length;
-                  handleCardClick(targetIndex);
-                }}
-              />
+          <div className="hidden lg:block absolute right-16 xl:right-32 bottom-44">
+            <CardCarousel
+              visibleCards={nextCards}
+              cardOffset={0}
+              activeIndex={-1}
+              expandingCardIndex={expandingCardIndex}
+              onCardClick={(idx) => {
+                const targetIndex = (activeIndex + idx + 1) % destinations.length;
+                handleCardClick(targetIndex);
+              }}
+            />
+          </div>
 
-              <NavigationControls
-                destinations={destinations}
-                activeIndex={activeIndex}
-                progress={progress}
-                isAnimating={isAnimating}
-                onNext={handleNext}
-                onPrev={handlePrev}
-              />
-            </div>
+          <div className="hidden lg:block absolute right-16 xl:right-32 bottom-28">
+            <NavigationControls
+              destinations={destinations}
+              activeIndex={activeIndex}
+              progress={progress}
+              isAnimating={isAnimating}
+              onNext={handleNext}
+              onPrev={handlePrev}
+            />
           </div>
 
           <div className="absolute bottom-12 right-8 md:right-16 z-30">

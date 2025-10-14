@@ -32,7 +32,7 @@ export default function ExpandingCard({
       ref={expandingCardRef}
       className="fixed z-[5] overflow-hidden"
       style={{
-        bottom: '112px',
+        bottom: '176px',
         right: `${calculatedRight}px`,
         width: `${initialWidth}px`,
         height: `${initialHeight}px`,
