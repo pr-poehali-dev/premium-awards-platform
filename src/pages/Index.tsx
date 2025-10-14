@@ -241,27 +241,40 @@ const Index = () => {
           }}
         />
 
-        {expandingCardIndex !== null && (
-          <div
-            ref={expandingCardRef}
-            className="fixed z-[50] rounded-2xl overflow-hidden"
-            style={{
-              bottom: '112px',
-              right: expandingCardIndex === activeIndex ? '64px' : `${64 + ((expandingCardIndex - cardOffset) * (192 + 24))}px`,
-              width: expandingCardIndex === activeIndex ? '224px' : '192px',
-              height: expandingCardIndex === activeIndex ? '340px' : '280px',
-              animation: 'expandCard 1s cubic-bezier(0.4, 0, 0.2, 1) forwards'
-            }}
-          >
+        {expandingCardIndex !== null && (() => {
+          const cardIndex = expandingCardIndex - cardOffset;
+          const isActiveCard = expandingCardIndex === activeIndex;
+          const initialRight = 64 + (cardIndex * (192 + 24));
+          const initialWidth = isActiveCard ? 224 : 192;
+          const initialHeight = isActiveCard ? 340 : 280;
+          
+          return (
             <div
-              className="absolute inset-0 bg-cover bg-center"
+              ref={expandingCardRef}
+              className="fixed z-[100] overflow-hidden"
               style={{
-                backgroundImage: `url(${destinations[expandingCardIndex].image})`,
-                filter: 'brightness(0.6)'
+                bottom: '112px',
+                right: `${initialRight}px`,
+                width: `${initialWidth}px`,
+                height: `${initialHeight}px`,
+                borderRadius: '16px',
+                animation: 'expandCard 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+                willChange: 'width, height, bottom, right, border-radius',
+                ['--initial-width' as any]: `${initialWidth}px`,
+                ['--initial-height' as any]: `${initialHeight}px`,
+                ['--initial-right' as any]: `${initialRight}px`
               }}
-            />
-          </div>
-        )}
+            >
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{
+                  backgroundImage: `url(${destinations[expandingCardIndex].image})`,
+                  filter: 'brightness(0.6)'
+                }}
+              />
+            </div>
+          );
+        })()}
 
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent z-[6]" />
 
@@ -473,15 +486,18 @@ const Index = () => {
 
           @keyframes expandCard {
             0% {
-              transform: scale(1);
+              width: var(--initial-width, 192px);
+              height: var(--initial-height, 280px);
+              bottom: 112px;
+              right: var(--initial-right, 300px);
+              border-radius: 16px;
             }
             100% {
-              width: 100vw !important;
-              height: 100vh !important;
-              bottom: 0 !important;
-              right: 0 !important;
-              border-radius: 0 !important;
-              transform: scale(1);
+              width: 100vw;
+              height: 100vh;
+              bottom: 0;
+              right: 0;
+              border-radius: 0;
             }
           }
         `}</style>
