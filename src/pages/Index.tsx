@@ -11,7 +11,6 @@ import { destinations } from '@/components/hero-slider/destinations-data';
 const Index = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isFadingOut, setIsFadingOut] = useState(false);
   const [cardOffset, setCardOffset] = useState(0);
   const [progress, setProgress] = useState(0);
   const [expandingCardIndex, setExpandingCardIndex] = useState<number | null>(null);
@@ -47,10 +46,6 @@ const Index = () => {
     setExpandingCardIndex(nextIndex);
     
     setTimeout(() => {
-      setIsFadingOut(true);
-    }, 50);
-    
-    setTimeout(() => {
       setCardOffset(prev => {
         const newOffset = prev + 1;
         if (newOffset > destinations.length - 4) return 0;
@@ -60,10 +55,6 @@ const Index = () => {
       setActiveIndex(nextIndex);
       setProgress(0);
     }, 400);
-    
-    setTimeout(() => {
-      setIsFadingOut(false);
-    }, 500);
     
     setTimeout(() => {
       setExpandingCardIndex(null);
@@ -79,10 +70,6 @@ const Index = () => {
     setExpandingCardIndex(prevIndex);
     
     setTimeout(() => {
-      setIsFadingOut(true);
-    }, 50);
-    
-    setTimeout(() => {
       setCardOffset(prev => {
         const newOffset = prev - 1;
         if (newOffset < 0) return destinations.length - 4;
@@ -92,10 +79,6 @@ const Index = () => {
       setActiveIndex(prevIndex);
       setProgress(0);
     }, 400);
-    
-    setTimeout(() => {
-      setIsFadingOut(false);
-    }, 500);
     
     setTimeout(() => {
       setExpandingCardIndex(null);
@@ -112,17 +95,9 @@ const Index = () => {
       setExpandingCardIndex(index);
       
       setTimeout(() => {
-        setIsFadingOut(true);
-      }, 50);
-      
-      setTimeout(() => {
         setActiveIndex(index);
         setProgress(0);
       }, 400);
-      
-      setTimeout(() => {
-        setIsFadingOut(false);
-      }, 500);
       
       setTimeout(() => {
         setExpandingCardIndex(null);
@@ -182,35 +157,38 @@ const Index = () => {
         )}
 
         <div className={`absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent ${
-          expandingCardIndex !== null ? 'z-[10]' : 'z-[3]'
+          expandingCardIndex !== null ? 'z-[10]' : 'z-[6]'
         }`} />
 
-        <div className="relative z-[15] h-full flex flex-col justify-between">
+        <div className="relative z-[15] h-full flex flex-col">
           <SlideContent active={active} />
+        </div>
 
-          <div className="hidden lg:block absolute right-16 xl:right-32 bottom-52">
-            <CardCarousel
-              visibleCards={nextCards}
-              cardOffset={0}
-              activeIndex={-1}
-              expandingCardIndex={expandingCardIndex !== null ? destinations[expandingCardIndex].id : null}
-              onCardClick={(idx) => {
-                const targetIndex = (activeIndex + idx + 1) % destinations.length;
-                handleCardClick(targetIndex);
-              }}
-            />
-          </div>
+        <div className="hidden lg:block absolute right-16 xl:right-32 bottom-52 z-[3]">
+          <CardCarousel
+            visibleCards={nextCards}
+            cardOffset={0}
+            activeIndex={-1}
+            expandingCardIndex={expandingCardIndex !== null ? destinations[expandingCardIndex].id : null}
+            onCardClick={(idx) => {
+              const targetIndex = (activeIndex + idx + 1) % destinations.length;
+              handleCardClick(targetIndex);
+            }}
+          />
+        </div>
 
-          <div className="hidden lg:block absolute right-16 xl:right-32 bottom-36">
-            <NavigationControls
-              destinations={destinations}
-              activeIndex={activeIndex}
-              progress={progress}
-              isAnimating={isAnimating}
-              onNext={handleNext}
-              onPrev={handlePrev}
-            />
-          </div>
+        <div className="hidden lg:block absolute right-16 xl:right-32 bottom-36 z-[3]">
+          <NavigationControls
+            destinations={destinations}
+            activeIndex={activeIndex}
+            progress={progress}
+            isAnimating={isAnimating}
+            onNext={handleNext}
+            onPrev={handlePrev}
+          />
+        </div>
+
+        <div className="relative z-[15]">
 
           <div className="absolute bottom-12 right-8 md:right-16 z-30">
             <div className="text-right">
