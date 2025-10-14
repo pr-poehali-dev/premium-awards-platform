@@ -175,6 +175,57 @@
       opacity 1s ease-in-out,
       transform 1s ease-in-out;
   }
+
+  @keyframes expandCard {
+    0% {
+      width: var(--initial-width, 192px);
+      height: var(--initial-height, 280px);
+      bottom: 176px;
+      right: var(--initial-right, 64px);
+      border-radius: 16px;
+    }
+    100% {
+      width: 100vw;
+      height: 100vh;
+      bottom: 0;
+      right: 0;
+      border-radius: 0;
+    }
+  }
+
+  @keyframes expandCardImage {
+    0% {
+      transform: scale(1.1);
+      filter: brightness(0.9);
+    }
+    100% {
+      transform: scale(1);
+      filter: brightness(0.6);
+    }
+  }
+
+  @keyframes fadeOutGradient {
+    0% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(30px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
 }
 
 @layer components {

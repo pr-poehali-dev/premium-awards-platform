@@ -132,8 +132,27 @@ const Index = () => {
   };
 
   const active = destinations[activeIndex];
+  const [visibleCardsCount, setVisibleCardsCount] = useState(4);
+
+  useEffect(() => {
+    const updateCardsCount = () => {
+      const width = window.innerWidth;
+      if (width >= 1536) {
+        setVisibleCardsCount(4);
+      } else if (width >= 1280) {
+        setVisibleCardsCount(3);
+      } else {
+        setVisibleCardsCount(2);
+      }
+    };
+
+    updateCardsCount();
+    window.addEventListener('resize', updateCardsCount);
+    return () => window.removeEventListener('resize', updateCardsCount);
+  }, []);
+
   const nextCards = [];
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i <= visibleCardsCount; i++) {
     nextCards.push(destinations[(activeIndex + i) % destinations.length]);
   }
 
@@ -141,23 +160,24 @@ const Index = () => {
     <>
       <AlternativeHeader />
       <div className="relative w-full h-screen overflow-hidden bg-black">
-        <div
-          key={`bg-${activeIndex}`}
-          className={`absolute inset-0 bg-cover bg-center transition-all duration-700 z-[1] ${
-            isFadingOut ? 'opacity-0 scale-105' : 'opacity-100 scale-100 delay-100'
-          }`}
-          style={{
-            backgroundImage: `url(${active.image})`,
-            filter: 'brightness(0.6)'
-          }}
-        />
-
-        {expandingCardIndex !== null && (
+        {expandingCardIndex !== null ? (
           <ExpandingCard
             expandingCardIndex={expandingCardIndex}
             activeIndex={activeIndex}
             destinations={destinations}
             expandingCardRef={expandingCardRef}
+            visibleCardsCount={visibleCardsCount}
+          />
+        ) : (
+          <div
+            key={`bg-${activeIndex}`}
+            className={`absolute inset-0 bg-cover bg-center transition-all duration-700 z-[1] ${
+              isFadingOut ? 'opacity-0 scale-105' : 'opacity-100 scale-100 delay-100'
+            }`}
+            style={{
+              backgroundImage: `url(${active.image})`,
+              filter: 'brightness(0.6)'
+            }}
           />
         )}
 

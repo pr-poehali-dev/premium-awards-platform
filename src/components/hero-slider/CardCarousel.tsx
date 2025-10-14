@@ -10,16 +10,21 @@ interface CardCarouselProps {
 
 export default function CardCarousel({
   visibleCards,
+  expandingCardIndex,
   onCardClick
 }: CardCarouselProps) {
   return (
     <div className="flex gap-6">
       {visibleCards.map((dest, idx) => {
+        const isExpanding = expandingCardIndex === dest.id;
+        
         return (
           <div
             key={`${dest.id}-${idx}`}
             onClick={() => onCardClick(idx)}
-            className="relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-700 ease-out w-48 h-[280px] opacity-90 hover:opacity-100 hover:scale-105"
+            className={`relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-700 ease-out w-48 h-[280px] ${
+              isExpanding ? 'opacity-0 pointer-events-none' : 'opacity-90 hover:opacity-100 hover:scale-105'
+            }`}
             style={{
               animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.1}s both`
             }}

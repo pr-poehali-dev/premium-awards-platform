@@ -6,13 +6,15 @@ interface ExpandingCardProps {
   activeIndex: number;
   destinations: Destination[];
   expandingCardRef: RefObject<HTMLDivElement>;
+  visibleCardsCount: number;
 }
 
 export default function ExpandingCard({
   expandingCardIndex,
   activeIndex,
   destinations,
-  expandingCardRef
+  expandingCardRef,
+  visibleCardsCount
 }: ExpandingCardProps) {
   const nextCardIndex = (expandingCardIndex - activeIndex - 1 + destinations.length) % destinations.length;
   
@@ -20,7 +22,7 @@ export default function ExpandingCard({
   const gap = 24;
   
   let calculatedRight = 64;
-  for (let i = 3; i > nextCardIndex; i--) {
+  for (let i = visibleCardsCount - 1; i > nextCardIndex; i--) {
     calculatedRight += cardWidth + gap;
   }
   
@@ -30,7 +32,7 @@ export default function ExpandingCard({
   return (
     <div
       ref={expandingCardRef}
-      className="fixed z-[5] overflow-hidden"
+      className="absolute overflow-hidden z-[2]"
       style={{
         bottom: '176px',
         right: `${calculatedRight}px`,
@@ -38,17 +40,21 @@ export default function ExpandingCard({
         height: `${initialHeight}px`,
         borderRadius: '16px',
         animation: 'expandCard 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards',
-        willChange: 'width, height, bottom, right, border-radius',
-        ['--initial-width' as any]: `${initialWidth}px`,
-        ['--initial-height' as any]: `${initialHeight}px`,
-        ['--initial-right' as any]: `${calculatedRight}px`
+        willChange: 'width, height, bottom, right, border-radius'
       }}
     >
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: `url(${destinations[expandingCardIndex].image})`,
-          filter: 'brightness(0.6)'
+          filter: 'brightness(0.6)',
+          animation: 'expandCardImage 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards'
+        }}
+      />
+      <div 
+        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"
+        style={{
+          animation: 'fadeOutGradient 0.6s ease-out forwards'
         }}
       />
     </div>
