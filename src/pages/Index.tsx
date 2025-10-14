@@ -261,10 +261,19 @@ const Index = () => {
 
         {expandingCardIndex !== null && (() => {
           const cardIndex = expandingCardIndex - cardOffset;
-          const isActiveCard = expandingCardIndex === activeIndex;
-          const initialRight = 64 + (cardIndex * (192 + 24));
-          const initialWidth = isActiveCard ? 224 : 192;
-          const initialHeight = isActiveCard ? 340 : 280;
+          const totalCards = 4;
+          const cardWidth = 192;
+          const activeCardWidth = 224;
+          const gap = 24;
+          
+          let calculatedRight = 64;
+          for (let i = totalCards - 1; i > cardIndex; i--) {
+            const currentCardWidth = (cardOffset + i) === activeIndex ? activeCardWidth : cardWidth;
+            calculatedRight += currentCardWidth + gap;
+          }
+          
+          const initialWidth = expandingCardIndex === activeIndex ? activeCardWidth : cardWidth;
+          const initialHeight = expandingCardIndex === activeIndex ? 340 : 280;
           
           return (
             <div
@@ -272,7 +281,7 @@ const Index = () => {
               className="fixed z-[100] overflow-hidden"
               style={{
                 bottom: '112px',
-                right: `${initialRight}px`,
+                right: `${calculatedRight}px`,
                 width: `${initialWidth}px`,
                 height: `${initialHeight}px`,
                 borderRadius: '16px',
@@ -280,7 +289,7 @@ const Index = () => {
                 willChange: 'width, height, bottom, right, border-radius',
                 ['--initial-width' as any]: `${initialWidth}px`,
                 ['--initial-height' as any]: `${initialHeight}px`,
-                ['--initial-right' as any]: `${initialRight}px`
+                ['--initial-right' as any]: `${calculatedRight}px`
               }}
             >
               <div
