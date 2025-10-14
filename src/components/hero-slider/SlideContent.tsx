@@ -4,18 +4,15 @@ import { Destination } from './destinations-data';
 
 interface SlideContentProps {
   active: Destination;
-  isFadingOut: boolean;
 }
 
-export default function SlideContent({ active, isFadingOut }: SlideContentProps) {
+export default function SlideContent({ active }: SlideContentProps) {
   const navigate = useNavigate();
 
   return (
     <div className="flex-1 flex items-center">
       <div className="container mx-auto px-8 md:px-16 py-20">
-        <div className={`max-w-xl transition-all duration-600 ${
-          isFadingOut ? 'opacity-0 translate-y-[40px]' : 'opacity-100 translate-y-0 delay-400'
-        }`}>
+        <div className="max-w-xl" key={active.id}>
           <div className="overflow-hidden mb-6">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2.5">
               <Icon name="Sparkles" size={16} className="text-white" />

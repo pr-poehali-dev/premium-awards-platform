@@ -36,7 +36,7 @@ export default function ExpandingCard({
           0% {
             width: ${initialWidth}px;
             height: ${initialHeight}px;
-            bottom: 176px;
+            bottom: 208px;
             right: ${calculatedRight}px;
             border-radius: 16px;
           }
@@ -53,7 +53,7 @@ export default function ExpandingCard({
         ref={expandingCardRef}
         className="absolute overflow-hidden z-[5]"
         style={{
-          bottom: '176px',
+          bottom: '208px',
           right: `${calculatedRight}px`,
           width: `${initialWidth}px`,
           height: `${initialHeight}px`,

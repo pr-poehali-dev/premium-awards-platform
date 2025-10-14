@@ -162,12 +162,12 @@ const Index = () => {
       <div className="relative w-full h-screen overflow-hidden bg-black">
         <div
           key={`bg-${activeIndex}`}
-          className={`absolute inset-0 bg-cover bg-center transition-all duration-700 z-[1] ${
-            expandingCardIndex !== null ? 'opacity-0' : (isFadingOut ? 'opacity-0 scale-105' : 'opacity-100 scale-100 delay-100')
-          }`}
+          className="absolute inset-0 bg-cover bg-center z-[1]"
           style={{
             backgroundImage: `url(${active.image})`,
-            filter: 'brightness(0.6)'
+            filter: 'brightness(0.6)',
+            opacity: expandingCardIndex !== null ? 0 : 1,
+            transition: 'none'
           }}
         />
 
@@ -186,11 +186,9 @@ const Index = () => {
         }`} />
 
         <div className="relative z-[15] h-full flex flex-col justify-between">
-          <SlideContent active={active} isFadingOut={isFadingOut} />
+          <SlideContent active={active} />
 
-          <div className={`hidden lg:block absolute right-16 xl:right-32 bottom-44 transition-opacity duration-300 ${
-            expandingCardIndex !== null ? 'opacity-0 pointer-events-none' : 'opacity-100'
-          }`}>
+          <div className="hidden lg:block absolute right-16 xl:right-32 bottom-52">
             <CardCarousel
               visibleCards={nextCards}
               cardOffset={0}
@@ -203,7 +201,7 @@ const Index = () => {
             />
           </div>
 
-          <div className="hidden lg:block absolute right-16 xl:right-32 bottom-28">
+          <div className="hidden lg:block absolute right-16 xl:right-32 bottom-36">
             <NavigationControls
               destinations={destinations}
               activeIndex={activeIndex}
