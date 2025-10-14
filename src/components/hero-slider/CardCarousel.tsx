@@ -1,4 +1,4 @@
-import { Destination } from './destinations-data';
+import { Destination, destinations } from './destinations-data';
 
 interface CardCarouselProps {
   visibleCards: Destination[];

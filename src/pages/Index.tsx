@@ -160,24 +160,24 @@ const Index = () => {
     <>
       <AlternativeHeader />
       <div className="relative w-full h-screen overflow-hidden bg-black">
-        {expandingCardIndex !== null ? (
+        <div
+          key={`bg-${activeIndex}`}
+          className={`absolute inset-0 bg-cover bg-center transition-all duration-700 z-[1] ${
+            expandingCardIndex !== null ? 'opacity-0' : (isFadingOut ? 'opacity-0 scale-105' : 'opacity-100 scale-100 delay-100')
+          }`}
+          style={{
+            backgroundImage: `url(${active.image})`,
+            filter: 'brightness(0.6)'
+          }}
+        />
+
+        {expandingCardIndex !== null && (
           <ExpandingCard
             expandingCardIndex={expandingCardIndex}
             activeIndex={activeIndex}
             destinations={destinations}
             expandingCardRef={expandingCardRef}
             visibleCardsCount={visibleCardsCount}
-          />
-        ) : (
-          <div
-            key={`bg-${activeIndex}`}
-            className={`absolute inset-0 bg-cover bg-center transition-all duration-700 z-[1] ${
-              isFadingOut ? 'opacity-0 scale-105' : 'opacity-100 scale-100 delay-100'
-            }`}
-            style={{
-              backgroundImage: `url(${active.image})`,
-              filter: 'brightness(0.6)'
-            }}
           />
         )}
 
@@ -191,7 +191,7 @@ const Index = () => {
               visibleCards={nextCards}
               cardOffset={0}
               activeIndex={-1}
-              expandingCardIndex={expandingCardIndex}
+              expandingCardIndex={expandingCardIndex !== null ? destinations[expandingCardIndex].id : null}
               onCardClick={(idx) => {
                 const targetIndex = (activeIndex + idx + 1) % destinations.length;
                 handleCardClick(targetIndex);

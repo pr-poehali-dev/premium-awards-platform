@@ -30,24 +30,42 @@ export default function ExpandingCard({
   const initialHeight = 280;
   
   return (
-    <div
-      ref={expandingCardRef}
-      className="absolute overflow-hidden z-[2]"
-      style={{
-        bottom: '176px',
-        right: `${calculatedRight}px`,
-        width: `${initialWidth}px`,
-        height: `${initialHeight}px`,
-        borderRadius: '16px',
-        animation: 'expandCard 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards',
-        willChange: 'width, height, bottom, right, border-radius'
-      }}
-    >
+    <>
+      <style>{`
+        @keyframes expandCardCustom {
+          0% {
+            width: ${initialWidth}px;
+            height: ${initialHeight}px;
+            bottom: 176px;
+            right: ${calculatedRight}px;
+            border-radius: 16px;
+          }
+          100% {
+            width: 100vw;
+            height: 100vh;
+            bottom: 0;
+            right: 0;
+            border-radius: 0;
+          }
+        }
+      `}</style>
+      <div
+        ref={expandingCardRef}
+        className="absolute overflow-hidden z-[2]"
+        style={{
+          bottom: '176px',
+          right: `${calculatedRight}px`,
+          width: `${initialWidth}px`,
+          height: `${initialHeight}px`,
+          borderRadius: '16px',
+          animation: 'expandCardCustom 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+          willChange: 'width, height, bottom, right, border-radius'
+        }}
+      >
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: `url(${destinations[expandingCardIndex].image})`,
-          filter: 'brightness(0.6)',
           animation: 'expandCardImage 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards'
         }}
       />
@@ -57,6 +75,7 @@ export default function ExpandingCard({
           animation: 'fadeOutGradient 0.6s ease-out forwards'
         }}
       />
-    </div>
+      </div>
+    </>
   );
 }
