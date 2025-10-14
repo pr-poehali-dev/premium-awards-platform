@@ -164,7 +164,7 @@ const Index = () => {
           <SlideContent active={active} />
         </div>
 
-        <div className="hidden lg:block absolute right-16 xl:right-32 bottom-52 z-[3]">
+        <div className="hidden lg:block absolute right-16 xl:right-32 bottom-64 z-[3]">
           <CardCarousel
             visibleCards={nextCards}
             cardOffset={0}
@@ -177,7 +177,7 @@ const Index = () => {
           />
         </div>
 
-        <div className="hidden lg:block absolute right-16 xl:right-32 bottom-36 z-[3]">
+        <div className="hidden lg:block absolute right-16 xl:right-32 bottom-20 z-[3]">
           <NavigationControls
             destinations={destinations}
             activeIndex={activeIndex}
