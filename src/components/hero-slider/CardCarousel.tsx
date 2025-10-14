@@ -22,15 +22,14 @@ export default function CardCarousel({
           <div
             key={`${dest.id}-${idx}`}
             onClick={() => onCardClick(idx)}
-            className={`relative rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] opacity-90 hover:opacity-100 hover:scale-105 transition-transform duration-300 ${
-              isExpanding ? 'fixed z-[5] animate-expand-to-fullscreen' : ''
-            }`}
+            className={`${isExpanding ? 'fixed z-[5]' : 'relative'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] opacity-90 hover:opacity-100 hover:scale-105 transition-transform duration-300`}
             style={
               isExpanding
                 ? {
                     animation: 'expandToFullscreen 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards',
                     bottom: '256px',
-                    right: `${64 + (visibleCards.length - 1 - idx) * (192 + 24)}px`
+                    right: `${64 + (visibleCards.length - 1 - idx) * (192 + 24)}px`,
+                    borderRadius: '16px'
                   }
                 : {
                     animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.1}s both`
@@ -38,11 +37,12 @@ export default function CardCarousel({
             }
           >
             <div
-              className="absolute inset-0 bg-cover bg-center transition-all duration-700"
+              className="absolute inset-0 bg-cover bg-center"
               style={{
                 backgroundImage: `url(${dest.image})`,
                 transform: 'scale(1.1)',
-                filter: 'brightness(0.9)'
+                filter: 'brightness(0.9)',
+                animation: isExpanding ? 'expandCardImage 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards' : 'none'
               }}
             />
             <div 
