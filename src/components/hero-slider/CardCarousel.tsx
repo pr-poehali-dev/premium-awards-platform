@@ -44,7 +44,6 @@ export default function CardCarousel({
                 ? {
                     top: `${cardPositionsRef.current[idx]?.top || window.innerHeight / 2}px`,
                     left: `${cardPositionsRef.current[idx]?.left || window.innerWidth / 2}px`,
-                    transform: 'translate(-50%, -50%)',
                     animation: 'expandFromCenter 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards'
                   }
                 : {
