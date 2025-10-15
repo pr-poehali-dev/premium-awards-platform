@@ -17,7 +17,7 @@ export default function SliderStyles() {
           width: 192px;
           height: 280px;
           border-radius: 16px;
-          transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%) scale(1);
         }
         100% {
           width: 100vw;
@@ -25,7 +25,7 @@ export default function SliderStyles() {
           border-radius: 0;
           top: 50% !important;
           left: 50% !important;
-          transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%) scale(1);
         }
       }
     `}</style>
