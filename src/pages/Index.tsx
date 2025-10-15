@@ -53,7 +53,7 @@ const Index = () => {
       
       setActiveIndex(nextIndex);
       setProgress(0);
-    }, 400);
+    }, 1600);
     
     setTimeout(() => {
       setExpandingCardIndex(null);
@@ -77,7 +77,7 @@ const Index = () => {
       
       setActiveIndex(prevIndex);
       setProgress(0);
-    }, 400);
+    }, 1600);
     
     setTimeout(() => {
       setExpandingCardIndex(null);
@@ -96,7 +96,7 @@ const Index = () => {
       setTimeout(() => {
         setActiveIndex(index);
         setProgress(0);
-      }, 400);
+      }, 1600);
       
       setTimeout(() => {
         setExpandingCardIndex(null);
