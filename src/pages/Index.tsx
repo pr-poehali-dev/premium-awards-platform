@@ -56,12 +56,12 @@ const Index = () => {
       
       setActiveIndex(nextIndex);
       setProgress(0);
-    }, 1600);
+    }, 800);
     
     setTimeout(() => {
       setExpandingCardIndex(null);
       setIsAnimating(false);
-    }, 1800);
+    }, 1000);
   };
 
   const handlePrev = () => {
@@ -80,12 +80,12 @@ const Index = () => {
       
       setActiveIndex(prevIndex);
       setProgress(0);
-    }, 1600);
+    }, 800);
     
     setTimeout(() => {
       setExpandingCardIndex(null);
       setIsAnimating(false);
-    }, 1800);
+    }, 1000);
   };
 
   const handleCardClick = (index: number) => {
@@ -99,12 +99,12 @@ const Index = () => {
       setTimeout(() => {
         setActiveIndex(index);
         setProgress(0);
-      }, 1600);
+      }, 800);
       
       setTimeout(() => {
         setExpandingCardIndex(null);
         setIsAnimating(false);
-      }, 1200);
+      }, 1000);
     }
   };
 
@@ -139,12 +139,22 @@ const Index = () => {
       <div className="hero-slider-container relative w-full h-screen overflow-hidden bg-black isolate">
         <div
           key={`bg-${activeIndex}`}
-          className="absolute inset-0 bg-cover bg-center z-[1]"
+          className="absolute inset-0 bg-cover bg-center z-[1] transition-opacity duration-700 ease-out"
           style={{
             backgroundImage: `url(${active.image})`,
-            filter: 'brightness(0.6)'
+            filter: 'brightness(0.6)',
+            opacity: isAnimating ? 0 : 1
           }}
         />
+        {expandingCardIndex !== null && (
+          <div
+            className="absolute inset-0 bg-cover bg-center z-[2] animate-fadeIn"
+            style={{
+              backgroundImage: `url(${destinations[expandingCardIndex].image})`,
+              filter: 'brightness(0.6)'
+            }}
+          />
+        )}
 
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent z-[6]" />
 

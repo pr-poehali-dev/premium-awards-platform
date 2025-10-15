@@ -12,30 +12,17 @@ export default function SliderStyles() {
         }
       }
 
-      @keyframes expandToFullSlider {
-        0% {
-          width: 192px;
-          height: 280px;
-          border-radius: 16px;
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
-        100% {
-          width: 100%;
-          height: 100%;
-          top: 0 !important;
-          left: 0 !important;
-          border-radius: 0;
+        to {
+          opacity: 1;
         }
       }
-      
-      @keyframes expandCardImage {
-        0% {
-          transform: scale(1.05);
-          filter: brightness(1.2);
-        }
-        100% {
-          transform: scale(1);
-          filter: brightness(0.6);
-        }
+
+      .animate-fadeIn {
+        animation: fadeIn 0.8s ease-out forwards;
       }
     `}</style>
   );
