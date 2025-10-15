@@ -20,6 +20,18 @@ export default function CardCarousel({
         const cardRight = 64 + (visibleCards.length - 1 - idx) * (192 + 24);
         const cardBottom = 256;
         
+        const scaleX = typeof window !== 'undefined' ? window.innerWidth / 192 : 1;
+        const scaleY = typeof window !== 'undefined' ? window.innerHeight / 280 : 1;
+        
+        const centerX = typeof window !== 'undefined' ? window.innerWidth / 2 : 0;
+        const centerY = typeof window !== 'undefined' ? window.innerHeight / 2 : 0;
+        
+        const cardCenterX = typeof window !== 'undefined' ? window.innerWidth - cardRight - 96 : 0;
+        const cardCenterY = cardBottom + 140;
+        
+        const translateX = (centerX - cardCenterX * scaleX) / scaleX;
+        const translateY = (centerY - cardCenterY * scaleY) / scaleY;
+        
         return (
           <div
             key={`${dest.id}-${idx}`}
@@ -28,13 +40,13 @@ export default function CardCarousel({
             style={
               isExpanding
                 ? {
-                    bottom: 0,
-                    left: 0,
+                    bottom: `${cardBottom}px`,
+                    right: `${cardRight}px`,
                     width: '192px',
                     height: '280px',
-                    transform: `translate(calc(100vw - ${cardRight}px - 192px), -${cardBottom}px)`,
                     zIndex: 50,
-                    animation: 'expandToFullscreen 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards'
+                    transformOrigin: 'center center',
+                    animation: `expandWithScale 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards`
                   }
                 : {
                     animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.1}s both`
