@@ -30,7 +30,7 @@ export default function CardCarousel({
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
-                    animation: 'expandFromCenter 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards'
+                    animation: 'expandFromCenter 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards'
                   }
                 : {
                     animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.1}s both`
@@ -43,7 +43,7 @@ export default function CardCarousel({
                 backgroundImage: `url(${dest.image})`,
                 transform: 'scale(1.05)',
                 filter: 'brightness(1.2)',
-                animation: isExpanding ? 'expandCardImage 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards' : 'none'
+                animation: isExpanding ? 'expandCardImage 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards' : 'none'
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
