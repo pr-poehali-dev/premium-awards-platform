@@ -12,15 +12,15 @@ export default function SliderStyles() {
         }
       }
 
-      @keyframes expandFromPosition {
+      @keyframes expandToFullSlider {
         0% {
           width: 192px;
           height: 280px;
           border-radius: 16px;
         }
         100% {
-          width: 100vw;
-          height: 100vh;
+          width: 100%;
+          height: 100%;
           top: 0 !important;
           left: 0 !important;
           border-radius: 0;
