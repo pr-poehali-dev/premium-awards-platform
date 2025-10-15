@@ -4,6 +4,9 @@ import AlternativeHeader from '@/components/AlternativeHeader';
 import SlideContent from '@/components/hero-slider/SlideContent';
 import CardCarousel from '@/components/hero-slider/CardCarousel';
 import NavigationControls from '@/components/hero-slider/NavigationControls';
+import { Button } from "@/components/ui/button";
+import Icon from "@/components/ui/icon";
+import Footer from "@/components/Footer";
 
 import SliderStyles from '@/components/hero-slider/SliderStyles';
 import { destinations } from '@/components/hero-slider/destinations-data';
@@ -225,6 +228,138 @@ const Index = () => {
 
         <SliderStyles />
       </div>
+
+      <section className="py-24 bg-card">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-16">Что входит в премиум-пакет</h2>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                icon: "Sparkles",
+                title: "Индивидуальный дизайн",
+                description: "Разработка уникального дизайна награды под ваш бренд и мероприятие"
+              },
+              {
+                icon: "Crown",
+                title: "Премиум материалы",
+                description: "Благородные металлы, хрусталь, натуральное дерево и кожа"
+              },
+              {
+                icon: "Palette",
+                title: "Эксклюзивная упаковка",
+                description: "Подарочная упаковка из дерева или кожи с вашим логотипом"
+              },
+              {
+                icon: "Award",
+                title: "Гравировка и логотипы",
+                description: "Лазерная гравировка, тиснение, эмалирование любой сложности"
+              },
+              {
+                icon: "Truck",
+                title: "Доставка и монтаж",
+                description: "Бережная доставка в любую точку мира и установка на месте"
+              },
+              {
+                icon: "Shield",
+                title: "Гарантия качества",
+                description: "5 лет гарантии на все изделия и бесплатное обслуживание"
+              }
+            ].map((item, idx) => (
+              <div key={idx} className="p-6 rounded-2xl bg-background hover:shadow-lg transition-shadow">
+                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <Icon name={item.icon} className="text-primary" size={28} />
+                </div>
+                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                <p className="text-muted-foreground">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-12 text-center">
+              {[
+                { number: "15+", label: "Лет на рынке" },
+                { number: "500+", label: "Довольных клиентов" },
+                { number: "5000+", label: "Изготовленных наград" }
+              ].map((stat, idx) => (
+                <div key={idx}>
+                  <div className="text-5xl font-bold mb-2">{stat.number}</div>
+                  <div className="text-primary-foreground/80">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-16">Как мы работаем</h2>
+            <div className="space-y-8">
+              {[
+                {
+                  step: "01",
+                  title: "Консультация и бриф",
+                  description: "Обсуждаем ваши задачи, бюджет и сроки. Определяем концепцию и стиль наград"
+                },
+                {
+                  step: "02",
+                  title: "Разработка дизайна",
+                  description: "Создаём 3D-визуализацию и согласовываем каждую деталь с вами"
+                },
+                {
+                  step: "03",
+                  title: "Производство",
+                  description: "Изготавливаем награды на собственном производстве с контролем качества"
+                },
+                {
+                  step: "04",
+                  title: "Упаковка и доставка",
+                  description: "Упаковываем в премиум-боксы и доставляем точно в срок"
+                }
+              ].map((item, idx) => (
+                <div key={idx} className="flex gap-6 items-start group">
+                  <div className="flex-shrink-0 w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-2xl font-bold text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    {item.step}
+                  </div>
+                  <div className="flex-1 pt-2">
+                    <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
+                    <p className="text-muted-foreground text-lg">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-card">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center space-y-6">
+            <h2 className="text-4xl font-bold">Готовы создать идеальную награду?</h2>
+            <p className="text-xl text-muted-foreground">
+              Оставьте заявку, и наш менеджер свяжется с вами в течение 30 минут
+            </p>
+            <div className="flex gap-4 justify-center pt-4">
+              <Button size="lg" className="h-14 px-10 text-lg">
+                <Icon name="Phone" className="mr-2" size={20} />
+                Заказать звонок
+              </Button>
+              <Button size="lg" variant="outline" className="h-14 px-10 text-lg">
+                <Icon name="Mail" className="mr-2" size={20} />
+                Написать нам
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </>
   );
 };
