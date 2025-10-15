@@ -24,14 +24,17 @@ export default function CardCarousel({
           <div
             key={`${dest.id}-${idx}`}
             onClick={() => onCardClick(idx)}
-            className={`${isExpanding ? 'fixed z-[5]' : 'relative z-10'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] ${!isExpanding ? 'hover:scale-105 transition-transform duration-300' : ''}`}
+            className={`${isExpanding ? 'fixed' : 'relative'} rounded-2xl overflow-hidden cursor-pointer ${!isExpanding ? 'w-48 h-[280px] z-10 hover:scale-105 transition-transform duration-300' : ''}`}
             style={
               isExpanding
                 ? {
-                    bottom: `${cardBottom}px`,
-                    right: `${cardRight}px`,
-                    animation: 'expandToFullscreen 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards',
-                    transformOrigin: 'bottom right'
+                    bottom: 0,
+                    left: 0,
+                    width: '192px',
+                    height: '280px',
+                    transform: `translate(calc(100vw - ${cardRight}px - 192px), -${cardBottom}px)`,
+                    zIndex: 50,
+                    animation: 'expandToFullscreen 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards'
                   }
                 : {
                     animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.1}s both`
