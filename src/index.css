@@ -228,18 +228,17 @@
   }
 
   @keyframes expandToFullscreen {
-    from {
+    0% {
       width: 192px;
       height: 280px;
       border-radius: 16px;
+      transform: translate(0, 0);
     }
-    to {
+    100% {
       width: 100vw;
       height: 100vh;
       border-radius: 0;
-      bottom: 0;
-      left: 0;
-      right: auto;
+      transform: translate(calc(-100vw + 192px), calc(100vh - 280px));
     }
   }
 }
