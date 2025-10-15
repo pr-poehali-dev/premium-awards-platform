@@ -254,6 +254,21 @@
       height: 100vh;
     }
   }
+
+  @keyframes expandFromPosition {
+    0% {
+      width: 192px;
+      height: 280px;
+      border-radius: 16px;
+    }
+    100% {
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      border-radius: 0;
+    }
+  }
 }
 
 @layer components {
