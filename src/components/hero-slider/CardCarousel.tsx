@@ -21,28 +21,31 @@ export default function CardCarousel({
     <div className="flex gap-6 relative z-10">
       {visibleCards.map((dest, idx) => {
         const isExpanding = expandingCardIndex === dest.id;
-        const position = cardPositions[idx] || { top: 0, left: 0 };
         
         return (
           <div
             key={`${dest.id}-${idx}`}
             ref={el => cardRefs.current[idx] = el}
-            onClick={() => {
-              // Сохраняем позицию ПЕРЕД кликом
+            onPointerDown={() => {
+              // Сохраняем ЦЕНТР карточки
               const el = cardRefs.current[idx];
               if (el) {
                 const rect = el.getBoundingClientRect();
-                cardPositionsRef.current[idx] = { top: rect.top, left: rect.left };
+                cardPositionsRef.current[idx] = { 
+                  top: rect.top + rect.height / 2, 
+                  left: rect.left + rect.width / 2
+                };
               }
-              onCardClick(idx);
             }}
-            className={`${isExpanding ? 'fixed' : 'relative'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] ${!isExpanding ? 'z-20 hover:scale-105 transition-transform duration-300' : 'z-[2]'}`}
+            onClick={() => onCardClick(idx)}
+            className={`${isExpanding ? 'fixed' : 'relative'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] ${!isExpanding ? 'z-20 hover:scale-105 transition-transform duration-300' : 'z-[2] !scale-100 !transition-none'}`}
             style={
               isExpanding
                 ? {
-                    top: `${cardPositionsRef.current[idx]?.top || 0}px`,
-                    left: `${cardPositionsRef.current[idx]?.left || 0}px`,
-                    animation: 'expandFromPosition 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards'
+                    top: `${(cardPositionsRef.current[idx]?.top || window.innerHeight / 2) - 140}px`,
+                    left: `${(cardPositionsRef.current[idx]?.left || window.innerWidth / 2) - 96}px`,
+                    transformOrigin: 'center center',
+                    animation: 'expandFromCenter 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards'
                   }
                 : {
                     animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.1}s both`
