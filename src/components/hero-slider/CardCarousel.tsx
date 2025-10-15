@@ -45,7 +45,7 @@ export default function CardCarousel({
                 animation: isExpanding ? 'expandCardImage 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards' : 'none'
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
 
             <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
               <p className="text-xs uppercase tracking-wider mb-1 opacity-80">{dest.subtitle}</p>
