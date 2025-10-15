@@ -1,4 +1,5 @@
 import { Destination } from './destinations-data';
+import { useEffect, useRef } from 'react';
 
 interface CardCarouselProps {
   visibleCards: Destination[];
@@ -17,36 +18,19 @@ export default function CardCarousel({
     <div className="flex gap-6 relative z-10">
       {visibleCards.map((dest, idx) => {
         const isExpanding = expandingCardIndex === dest.id;
-        const cardRight = 64 + (visibleCards.length - 1 - idx) * (192 + 24);
-        const cardBottom = 256;
-        
-        const scaleX = typeof window !== 'undefined' ? window.innerWidth / 192 : 1;
-        const scaleY = typeof window !== 'undefined' ? window.innerHeight / 280 : 1;
-        
-        const centerX = typeof window !== 'undefined' ? window.innerWidth / 2 : 0;
-        const centerY = typeof window !== 'undefined' ? window.innerHeight / 2 : 0;
-        
-        const cardCenterX = typeof window !== 'undefined' ? window.innerWidth - cardRight - 96 : 0;
-        const cardCenterY = cardBottom + 140;
-        
-        const translateX = (centerX - cardCenterX * scaleX) / scaleX;
-        const translateY = (centerY - cardCenterY * scaleY) / scaleY;
         
         return (
           <div
             key={`${dest.id}-${idx}`}
             onClick={() => onCardClick(idx)}
-            className={`${isExpanding ? 'fixed' : 'relative'} rounded-2xl overflow-hidden cursor-pointer ${!isExpanding ? 'w-48 h-[280px] z-10 hover:scale-105 transition-transform duration-300' : ''}`}
+            className={`${isExpanding ? 'fixed' : 'relative'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] ${!isExpanding ? 'z-10 hover:scale-105 transition-transform duration-300' : 'z-50'}`}
             style={
               isExpanding
                 ? {
-                    bottom: `${cardBottom}px`,
-                    right: `${cardRight}px`,
-                    width: '192px',
-                    height: '280px',
-                    zIndex: 50,
-                    transformOrigin: 'center center',
-                    animation: `expandWithScale 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards`
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    animation: 'expandFromCenter 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards'
                   }
                 : {
                     animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.1}s both`

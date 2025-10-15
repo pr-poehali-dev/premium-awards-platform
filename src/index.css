@@ -240,14 +240,18 @@
     }
   }
 
-  @keyframes expandWithScale {
+  @keyframes expandFromCenter {
     0% {
-      transform: scale(1) translate(0, 0);
+      transform: translate(-50%, -50%) scale(1);
       border-radius: 16px;
+      width: 192px;
+      height: 280px;
     }
     100% {
-      transform: scale(calc(100vw / 192), calc(100vh / 280)) translate(0, 0);
+      transform: translate(-50%, -50%) scale(1);
       border-radius: 0;
+      width: 100vw;
+      height: 100vh;
     }
   }
 }
