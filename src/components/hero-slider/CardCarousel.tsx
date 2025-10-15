@@ -17,19 +17,20 @@ export default function CardCarousel({
     <div className="flex gap-6 relative z-10">
       {visibleCards.map((dest, idx) => {
         const isExpanding = expandingCardIndex === dest.id;
+        const cardRight = 64 + (visibleCards.length - 1 - idx) * (192 + 24);
+        const cardBottom = 256;
         
         return (
           <div
             key={`${dest.id}-${idx}`}
             onClick={() => onCardClick(idx)}
-            className={`${isExpanding ? 'fixed z-[5]' : 'relative z-10'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] hover:scale-105 transition-transform duration-300`}
+            className={`${isExpanding ? 'fixed z-[5]' : 'relative z-10'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] ${!isExpanding ? 'hover:scale-105' : ''} transition-transform duration-300`}
             style={
               isExpanding
                 ? {
-                    animation: 'expandToFullscreen 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards',
-                    bottom: '256px',
-                    left: 'auto',
-                    right: `${64 + (visibleCards.length - 1 - idx) * (192 + 24)}px`
+                    bottom: `${cardBottom}px`,
+                    right: `${cardRight}px`,
+                    animation: 'expandToFullscreen 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards'
                   }
                 : {
                     animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.1}s both`
