@@ -58,7 +58,7 @@ const Index = () => {
     setTimeout(() => {
       setExpandingCardIndex(null);
       setIsAnimating(false);
-    }, 900);
+    }, 1200);
   };
 
   const handlePrev = () => {
@@ -82,7 +82,7 @@ const Index = () => {
     setTimeout(() => {
       setExpandingCardIndex(null);
       setIsAnimating(false);
-    }, 900);
+    }, 1200);
   };
 
   const handleCardClick = (index: number) => {
@@ -101,7 +101,7 @@ const Index = () => {
       setTimeout(() => {
         setExpandingCardIndex(null);
         setIsAnimating(false);
-      }, 900);
+      }, 1200);
     }
   };
 
