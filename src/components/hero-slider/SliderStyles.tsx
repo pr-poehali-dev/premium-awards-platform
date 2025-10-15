@@ -12,20 +12,19 @@ export default function SliderStyles() {
         }
       }
 
-      @keyframes expandCard {
+      @keyframes expandFromCenter {
         0% {
-          width: var(--initial-width, 192px);
-          height: var(--initial-height, 280px);
-          bottom: 112px;
-          right: var(--initial-right, 300px);
+          width: 192px;
+          height: 280px;
           border-radius: 16px;
         }
         100% {
           width: 100vw;
           height: 100vh;
-          bottom: 0;
-          right: 0;
+          top: 50% !important;
+          left: 50% !important;
           border-radius: 0;
+          transform: translate(-50%, -50%);
         }
       }
     `}</style>
