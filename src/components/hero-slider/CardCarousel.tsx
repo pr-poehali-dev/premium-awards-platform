@@ -27,13 +27,13 @@ export default function CardCarousel({
             key={`${dest.id}-${idx}`}
             ref={el => cardRefs.current[idx] = el}
             onClick={() => {
-              // Сохраняем центр карточки ПЕРЕД кликом
+              // Сохраняем верхний левый угол карточки ПЕРЕД кликом
               const el = cardRefs.current[idx];
               if (el) {
                 const rect = el.getBoundingClientRect();
                 cardPositionsRef.current[idx] = { 
-                  top: rect.top + rect.height / 2, 
-                  left: rect.left + rect.width / 2 
+                  top: rect.top, 
+                  left: rect.left 
                 };
               }
               onCardClick(idx);
@@ -42,8 +42,8 @@ export default function CardCarousel({
             style={
               isExpanding
                 ? {
-                    top: `${(cardPositionsRef.current[idx]?.top || window.innerHeight / 2) - 140}px`,
-                    left: `${(cardPositionsRef.current[idx]?.left || window.innerWidth / 2) - 96}px`,
+                    top: `${cardPositionsRef.current[idx]?.top || 0}px`,
+                    left: `${cardPositionsRef.current[idx]?.left || 0}px`,
                     transformOrigin: 'center center',
                     animation: 'expandFromCenter 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards'
                   }
