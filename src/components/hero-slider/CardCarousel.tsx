@@ -65,6 +65,7 @@ export default function CardCarousel({
                 : !isExpanding ? {
                     animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.1}s both`
                   } : {}
+            }
           >
             <div
               className="absolute inset-0 bg-cover bg-center"
