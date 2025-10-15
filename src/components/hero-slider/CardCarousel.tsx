@@ -16,28 +16,22 @@ export default function CardCarousel({
 }: CardCarouselProps) {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [cardPositions, setCardPositions] = useState<{top: number, left: number, width: number, height: number}[]>([]);
-  const [sliderRect, setSliderRect] = useState<{top: number, left: number} | null>(null);
+  const [cardPositions, setCardPositions] = useState<{top: number, left: number}[]>([]);
 
   useEffect(() => {
     if (expandingCardIndex !== null) {
       const slider = document.querySelector('.hero-slider-container');
-      if (slider) {
-        const sliderBounds = slider.getBoundingClientRect();
-        setSliderRect({ top: sliderBounds.top, left: sliderBounds.left });
-      }
+      const sliderBounds = slider?.getBoundingClientRect();
       
       const positions = cardRefs.current.map(ref => {
-        if (ref) {
+        if (ref && sliderBounds) {
           const rect = ref.getBoundingClientRect();
           return { 
-            top: rect.top, 
-            left: rect.left,
-            width: rect.width,
-            height: rect.height
+            top: rect.top - sliderBounds.top, 
+            left: rect.left - sliderBounds.left
           };
         }
-        return { top: 0, left: 0, width: 192, height: 280 };
+        return { top: 0, left: 0 };
       });
       setCardPositions(positions);
     }
@@ -47,7 +41,7 @@ export default function CardCarousel({
     <div ref={containerRef} className="flex gap-6 relative z-10">
       {visibleCards.map((dest, idx) => {
         const isExpanding = expandingCardIndex === dest.id;
-        const position = cardPositions[idx] || { top: 0, left: 0, width: 192, height: 280 };
+        const position = cardPositions[idx];
         
         return (
           <div
@@ -56,15 +50,15 @@ export default function CardCarousel({
             onClick={() => onCardClick(idx)}
             className={`${isExpanding ? 'absolute' : 'relative'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] ${!isExpanding ? 'z-20 hover:scale-105 transition-transform duration-300' : 'z-[100]'}`}
             style={
-              isExpanding && sliderRect
+              isExpanding && position
                 ? {
-                    top: `${position.top - sliderRect.top}px`,
-                    left: `${position.left - sliderRect.left}px`,
+                    top: `${position.top}px`,
+                    left: `${position.left}px`,
                     animation: 'expandToFullSlider 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards'
                   }
-                : !isExpanding ? {
+                : {
                     animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.1}s both`
-                  } : {}
+                  }
             }
           >
             <div
