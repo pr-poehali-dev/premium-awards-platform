@@ -15,20 +15,7 @@ export default function CardCarousel({
   onCardClick
 }: CardCarouselProps) {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [cardPositions, setCardPositions] = useState<{top: number, left: number}[]>([]);
-
-  useEffect(() => {
-    if (expandingCardIndex !== null) {
-      const positions = cardRefs.current.map(ref => {
-        if (ref) {
-          const rect = ref.getBoundingClientRect();
-          return { top: rect.top, left: rect.left };
-        }
-        return { top: 0, left: 0 };
-      });
-      setCardPositions(positions);
-    }
-  }, [expandingCardIndex]);
+  const cardPositionsRef = useRef<{top: number, left: number}[]>([]);
 
   return (
     <div className="flex gap-6 relative z-10">
@@ -40,13 +27,21 @@ export default function CardCarousel({
           <div
             key={`${dest.id}-${idx}`}
             ref={el => cardRefs.current[idx] = el}
-            onClick={() => onCardClick(idx)}
+            onClick={() => {
+              // Сохраняем позицию ПЕРЕД кликом
+              const el = cardRefs.current[idx];
+              if (el) {
+                const rect = el.getBoundingClientRect();
+                cardPositionsRef.current[idx] = { top: rect.top, left: rect.left };
+              }
+              onCardClick(idx);
+            }}
             className={`${isExpanding ? 'fixed' : 'relative'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] ${!isExpanding ? 'z-20 hover:scale-105 transition-transform duration-300' : 'z-[2]'}`}
             style={
               isExpanding
                 ? {
-                    top: `${position.top}px`,
-                    left: `${position.left}px`,
+                    top: `${cardPositionsRef.current[idx]?.top || 0}px`,
+                    left: `${cardPositionsRef.current[idx]?.left || 0}px`,
                     animation: 'expandFromPosition 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards'
                   }
                 : {
