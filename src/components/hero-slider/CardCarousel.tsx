@@ -21,7 +21,6 @@ export default function CardCarousel({
     <div className="flex gap-6 relative z-10">
       {visibleCards.map((dest, idx) => {
         const isExpanding = expandingCardIndex === dest.id;
-        const position = cardPositions[idx] || { top: 0, left: 0 };
         
         return (
           <div
