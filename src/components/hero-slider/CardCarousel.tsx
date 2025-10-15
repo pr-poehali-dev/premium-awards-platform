@@ -27,13 +27,13 @@ export default function CardCarousel({
             key={`${dest.id}-${idx}`}
             ref={el => cardRefs.current[idx] = el}
             onPointerDown={() => {
-              // Сохраняем координаты ДО клика, пока карточка еще relative
+              // Сохраняем ЦЕНТР карточки ДО клика
               const el = cardRefs.current[idx];
               if (el) {
                 const rect = el.getBoundingClientRect();
                 cardPositionsRef.current[idx] = { 
-                  top: rect.top, 
-                  left: rect.left 
+                  top: rect.top + rect.height / 2, 
+                  left: rect.left + rect.width / 2 
                 };
               }
             }}
