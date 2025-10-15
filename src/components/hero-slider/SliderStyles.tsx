@@ -12,19 +12,18 @@ export default function SliderStyles() {
         }
       }
 
-      @keyframes expandFromCenter {
+      @keyframes expandToFullScreen {
         0% {
           width: 192px;
           height: 280px;
           border-radius: 16px;
+          inset: auto;
         }
         100% {
-          width: 100%;
-          height: 100%;
-          top: 0 !important;
-          left: 0 !important;
+          width: 100vw;
+          height: 100vh;
           border-radius: 0;
-          transform: translate(0, 0);
+          inset: 0;
         }
       }
     `}</style>
