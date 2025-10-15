@@ -139,9 +139,7 @@ const Index = () => {
           className="absolute inset-0 bg-cover bg-center z-[1]"
           style={{
             backgroundImage: `url(${active.image})`,
-            filter: 'brightness(0.6)',
-            opacity: expandingCardIndex !== null ? 0 : 1,
-            transition: 'none'
+            filter: 'brightness(0.6)'
           }}
         />
 
