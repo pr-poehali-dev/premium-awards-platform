@@ -136,7 +136,7 @@ const Index = () => {
   return (
     <>
       <AlternativeHeader />
-      <div className="relative w-full h-screen overflow-hidden bg-black">
+      <div className="relative w-full h-screen overflow-hidden bg-black isolate">
         <div
           key={`bg-${activeIndex}`}
           className="absolute inset-0 bg-cover bg-center z-[1]"
