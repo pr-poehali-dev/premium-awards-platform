@@ -14,7 +14,7 @@ export default function CardCarousel({
   onCardClick
 }: CardCarouselProps) {
   return (
-    <div className="flex gap-6">
+    <div className="flex gap-6 relative z-10">
       {visibleCards.map((dest, idx) => {
         const isExpanding = expandingCardIndex === dest.id;
         
@@ -22,7 +22,7 @@ export default function CardCarousel({
           <div
             key={`${dest.id}-${idx}`}
             onClick={() => onCardClick(idx)}
-            className={`${isExpanding ? 'fixed z-[5]' : 'relative'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] hover:scale-105 transition-transform duration-300`}
+            className={`${isExpanding ? 'fixed z-[5]' : 'relative z-10'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] hover:scale-105 transition-transform duration-300`}
             style={
               isExpanding
                 ? {
