@@ -38,7 +38,7 @@ export default function CardCarousel({
               }
               onCardClick(idx);
             }}
-            className={`${isExpanding ? 'fixed' : 'relative'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] ${!isExpanding ? 'z-20 hover:scale-105 transition-transform duration-300' : 'z-[2]'}`}
+            className={`${isExpanding ? 'fixed' : 'relative'} rounded-2xl overflow-hidden cursor-pointer w-48 h-[280px] ${!isExpanding ? 'z-20 hover:scale-105 transition-transform duration-300' : 'z-[2] !scale-100 !transition-none'}`}
             style={
               isExpanding
                 ? {
