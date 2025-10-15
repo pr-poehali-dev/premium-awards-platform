@@ -12,18 +12,29 @@ export default function SliderStyles() {
         }
       }
 
-      @keyframes expandToFullScreen {
+      @keyframes expandFromPosition {
         0% {
           width: 192px;
           height: 280px;
           border-radius: 16px;
-          inset: auto;
         }
         100% {
           width: 100vw;
           height: 100vh;
+          top: 0 !important;
+          left: 0 !important;
           border-radius: 0;
-          inset: 0;
+        }
+      }
+      
+      @keyframes expandCardImage {
+        0% {
+          transform: scale(1.05);
+          filter: brightness(1.2);
+        }
+        100% {
+          transform: scale(1);
+          filter: brightness(0.6);
         }
       }
     `}</style>
