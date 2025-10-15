@@ -28,8 +28,8 @@ export default function CardCarousel({
                 ? {
                     animation: 'expandToFullscreen 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards',
                     bottom: '256px',
-                    right: `${64 + (visibleCards.length - 1 - idx) * (192 + 24)}px`,
-                    borderRadius: '16px'
+                    left: 'auto',
+                    right: `${64 + (visibleCards.length - 1 - idx) * (192 + 24)}px`
                   }
                 : {
                     animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.1}s both`

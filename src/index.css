@@ -229,15 +229,15 @@
 
   @keyframes expandToFullscreen {
     0% {
-      width: 192px;
-      height: 280px;
+      transform: translate(0, 0) scale(1);
       border-radius: 16px;
     }
     100% {
-      width: 100vw;
-      height: 100vh;
-      bottom: 0 !important;
-      right: 0 !important;
+      transform: translate(
+          calc(-1 * var(--card-right)),
+          calc(100vh - var(--card-bottom) - 280px)
+        )
+        scale(calc(100vw / 192));
       border-radius: 0;
     }
   }
