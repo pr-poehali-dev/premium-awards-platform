@@ -42,8 +42,9 @@ export default function CardCarousel({
             style={
               isExpanding
                 ? {
-                    top: `${cardPositionsRef.current[idx]?.top || window.innerHeight / 2}px`,
-                    left: `${cardPositionsRef.current[idx]?.left || window.innerWidth / 2}px`,
+                    top: `${(cardPositionsRef.current[idx]?.top || window.innerHeight / 2) - 140}px`,
+                    left: `${(cardPositionsRef.current[idx]?.left || window.innerWidth / 2) - 96}px`,
+                    transformOrigin: 'center center',
                     animation: 'expandFromCenter 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards'
                   }
                 : {
