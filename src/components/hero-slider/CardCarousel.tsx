@@ -42,11 +42,10 @@ export default function CardCarousel({
             style={
               isExpanding
                 ? {
-                    top: '50%',
-                    left: '50%',
+                    top: `${cardPositionsRef.current[idx]?.top || window.innerHeight / 2}px`,
+                    left: `${cardPositionsRef.current[idx]?.left || window.innerWidth / 2}px`,
                     transformOrigin: 'center',
-                    transform: `translate(${(cardPositionsRef.current[idx]?.left || window.innerWidth / 2) - window.innerWidth / 2}px, ${(cardPositionsRef.current[idx]?.top || window.innerHeight / 2) - window.innerHeight / 2}px)`,
-                    animation: 'expandFromCenter 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards'
+                    animation: 'expandFromCenter 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards'
                   }
                 : {
                     animation: `slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.1}s both`
