@@ -139,7 +139,7 @@ const Index = () => {
       <div className="hero-slider-container relative w-full h-screen overflow-hidden bg-black isolate">
         <div
           key={`bg-${activeIndex}`}
-          className="absolute inset-0 bg-cover bg-center z-[1] transition-opacity duration-700 ease-out"
+          className="absolute inset-0 bg-cover bg-center z-[1] transition-opacity duration-[800ms] ease-out"
           style={{
             backgroundImage: `url(${active.image})`,
             filter: 'brightness(0.6)',
